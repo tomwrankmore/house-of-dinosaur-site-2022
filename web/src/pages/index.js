@@ -89,7 +89,7 @@ const IndexPage = props => {
       <Container>
         <h1 hidden>Welcome to {site.title}</h1>
         <p>
-          Hi bitch.
+          Hi bitch ass.
         </p>
         {projectNodes && (
           <ProjectPreviewGrid
