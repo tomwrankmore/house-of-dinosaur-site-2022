@@ -2,7 +2,7 @@ import React, {useRef} from "react";
 import styled from "styled-components";
 import {StyledHero} from "./hero.styled"
 import DinosaurLogo from "../DinosaurLogo";
-import OrangeWave from "../SvgComponents/orangeWave"
+import OrangeWave from "../SVGComponents/orangeWave"
 import HeroLogo from "../../assets/hero-logo-full.svg"
 
 const NewHeroWrapper = styled.div` 

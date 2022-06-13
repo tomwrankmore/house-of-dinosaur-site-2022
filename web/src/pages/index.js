@@ -19,7 +19,7 @@ import Layout from "../containers/layout";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-import Spinner from '../components/SvgComponents/spinner'
+import Spinner from '../components/SVGComponents/spinner'
 
 export const query = graphql`
   query IndexPageQuery {
