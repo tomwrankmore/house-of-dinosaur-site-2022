@@ -15,7 +15,11 @@ body {
 
 html,
 body,
-body > div,
-body > div > div {
+body>div,
+body>div>div {
   height: 100%;
+}
+
+.lineParent {
+  overflow: hidden;
 }

@@ -1,9 +1,23 @@
 import React, {useRef} from "react";
 import styled from "styled-components";
-import {StyledHero} from "./hero.styled"
 import DinosaurLogo from "../DinosaurLogo";
-import OrangeWave from "../SVGComponents/orangeWave"
-import HeroLogo from "../../assets/hero-logo-full.svg"
+import OrangeWave from "../SVGComponents/orangeWave";
+import HeroLogo from "../../assets/hero-logo-full.svg";
+import {device} from '../../styles/mediaQueries';
+import {colors} from '../../styles/colours'
+
+export const StyledHero = styled.section`
+    background-color: ${colors.dinoOffWhite};
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+
+  @media ${device.mediaMinSmall} {    
+    }
+`
 
 const NewHeroWrapper = styled.div` 
     position: relative;
@@ -16,7 +30,7 @@ const StyledHeroLogo = styled(HeroLogo)`
     z-index: 10;
 `
 
-const Hero = ({addToRefs, houseRef}) => {
+const Hero = ({addToRefs}) => {
     return (
     <StyledHero>
         <NewHeroWrapper>

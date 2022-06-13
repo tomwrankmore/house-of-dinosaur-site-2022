@@ -11,11 +11,13 @@ import {
 } from "../lib/helpers";
 import Container from "../components/Container/container";
 import Hero from "../components/Hero/hero";
+import { heroAnim, straplineAnim } from "../components/animations/";
 
 import GraphQLErrorList from "../components/graphql-error-list";
 import ProjectPreviewGrid from "../components/ProjectPreviewGrid/project-preview-grid";
 import SEO from "../components/seo";
 import Layout from "../containers/layout";
+import StraplineSection from "../components/HomeSections/StraplineSection/index"
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -91,20 +93,15 @@ const IndexPage = props => {
       }
   };
   const items = revealRefs.current;
+  const spinnerTl = useRef();
 
-  const tl = gsap.timeline()
+  const reffyRef = useRef()
 
   useEffect(() => {
-      gsap.set(items, {
-        visibility: 'hidden',
-        yPercent: 200,
-      })
-
       let rotateSetter = gsap.quickTo(spinnerRef.current, 'rotation')
       let clamp = gsap.utils.clamp(-1080, 1080)
-
+    
       let smoother = ScrollSmoother.create({
-          // wrapper: "#smooth-wrapper",
           content: "#smooth-content",
           smooth: 1.5,
           normalizeScroll: true, // prevents address bar from showing/hiding on most devices, solves various other browser inconsistencies
@@ -115,19 +112,11 @@ const IndexPage = props => {
             rotateSetter(clamp(self.getVelocity()))
           }
       });
-      tl.to(items, {
-        autoAlpha: 1,
-        yPercent: 0,
-        stagger: 0.1,
-        duration: 1,
-        ease: "back.out(2.75)"
-      })
-      items.forEach((item, i) => {
-          smoother.effects(item, { lag: i * 0.75 });
-      });
-      smoother.effects(spinnerRef.current, { lag: 0.5 });
-      // smoother.effects(houseRef.current, { lag: 2 * 0.75 });
-  }, [items])
+      spinnerTl.current = gsap.timeline()
+      // straplineTl.current = gsap.timeline()
+      heroAnim(smoother, items, spinnerRef.current, spinnerTl.current)
+      // straplineAnim(smoother, straplineRef.current, straplineTl.current)
+  }, [])
 
   const site = (data || {}).site;
   const projectNodes = (data || {}).projects
@@ -146,8 +135,9 @@ const IndexPage = props => {
     <Layout id="smooth-content">
         <SEO title={site.title} description={site.description} keywords={site.keywords} />
         <Spinner ref={spinnerRef} />
-        <Hero addToRefs={addToRefs} houseRef={houseRef} />
-        <Container>
+        <Hero addToRefs={addToRefs} />
+        <StraplineSection reffyRef={reffyRef} />
+        {/* <Container>
           <h1>Welcome to {site.title}</h1>
           {projectNodes && (
             <ProjectPreviewGrid
@@ -156,7 +146,7 @@ const IndexPage = props => {
               browseMoreHref="/archive/"
             />
           )}
-        </Container>
+        </Container> */}
         <Container style={{height: 'calc(100vh - 88px)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '88px'}}>
           <h1 style={{color: 'black'}}>Section One</h1>
         </Container>

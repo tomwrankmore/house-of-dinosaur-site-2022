@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../Header/header";
 import styled from 'styled-components'
+import { colors } from "../../styles/colours";
 
 import "../../styles/layout.css";
 import * as styles from "./layout.module.css";
@@ -9,6 +10,7 @@ const SiteWrapper = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: ${colors.darkDinoGreen};
 `
 
 const Content = styled.div` 
