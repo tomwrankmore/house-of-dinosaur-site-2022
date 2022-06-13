@@ -12,6 +12,7 @@
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
   },
   "dependencies": {
+    "@fontsource/syne": "^4.5.9",
     "@portabletext/react": "^1.0.1",
     "@sanity/image-url": "^1.0.1",
     "babel-plugin-styled-components": "^2.0.7",

@@ -1,15 +1,25 @@
-import React from "react";
+import React, {useRef, useEffect, useState} from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import ScrollSmoother from "gsap/ScrollSmoother";
+
 import { graphql } from "gatsby";
 import {
   mapEdgesToNodes,
   filterOutDocsWithoutSlugs,
   filterOutDocsPublishedInTheFuture
 } from "../lib/helpers";
-import Container from "../components/container";
+import Container from "../components/Container/container";
+import Hero from "../components/Hero/hero";
+
 import GraphQLErrorList from "../components/graphql-error-list";
-import ProjectPreviewGrid from "../components/project-preview-grid";
+import ProjectPreviewGrid from "../components/ProjectPreviewGrid/project-preview-grid";
 import SEO from "../components/seo";
 import Layout from "../containers/layout";
+
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+import Spinner from '../components/SvgComponents/spinner'
 
 export const query = graphql`
   query IndexPageQuery {
@@ -70,6 +80,55 @@ const IndexPage = props => {
     );
   }
 
+  const spinnerRef = useRef(null)
+  const houseRef = useRef(null)
+
+  const revealRefs = useRef([]);
+  revealRefs.current = [];
+  const addToRefs = (el) => {
+      if(el && !revealRefs.current.includes(el)) {
+          revealRefs.current.push(el)
+      }
+  };
+  const items = revealRefs.current;
+
+  const tl = gsap.timeline()
+
+  useEffect(() => {
+      gsap.set(items, {
+        visibility: 'hidden',
+        yPercent: 200,
+      })
+
+      let rotateSetter = gsap.quickTo(spinnerRef.current, 'rotation')
+      let clamp = gsap.utils.clamp(-1080, 1080)
+
+      let smoother = ScrollSmoother.create({
+          // wrapper: "#smooth-wrapper",
+          content: "#smooth-content",
+          smooth: 1.5,
+          normalizeScroll: true, // prevents address bar from showing/hiding on most devices, solves various other browser inconsistencies
+          ignoreMobileResize: true, // skips ScrollTrigger.refresh() on mobile resizes from address bar showing/hiding
+          effects: true,
+          preventDefault: true,
+          onUpdate: (self) => {
+            rotateSetter(clamp(self.getVelocity()))
+          }
+      });
+      tl.to(items, {
+        autoAlpha: 1,
+        yPercent: 0,
+        stagger: 0.1,
+        duration: 1,
+        ease: "back.out(2.75)"
+      })
+      items.forEach((item, i) => {
+          smoother.effects(item, { lag: i * 0.75 });
+      });
+      smoother.effects(spinnerRef.current, { lag: 0.5 });
+      // smoother.effects(houseRef.current, { lag: 2 * 0.75 });
+  }, [items])
+
   const site = (data || {}).site;
   const projectNodes = (data || {}).projects
     ? mapEdgesToNodes(data.projects)
@@ -84,21 +143,26 @@ const IndexPage = props => {
   }
 
   return (
-    <Layout>
-      <SEO title={site.title} description={site.description} keywords={site.keywords} />
-      <Container>
-        <h1 hidden>Welcome to {site.title}</h1>
-        <p>
-          Hi bitch ass.
-        </p>
-        {projectNodes && (
-          <ProjectPreviewGrid
-            title="Latest projects"
-            nodes={projectNodes}
-            browseMoreHref="/archive/"
-          />
-        )}
-      </Container>
+    <Layout id="smooth-content">
+        <SEO title={site.title} description={site.description} keywords={site.keywords} />
+        <Spinner ref={spinnerRef} />
+        <Hero addToRefs={addToRefs} houseRef={houseRef} />
+        <Container>
+          <h1>Welcome to {site.title}</h1>
+          {projectNodes && (
+            <ProjectPreviewGrid
+              title="Latest projects"
+              nodes={projectNodes}
+              browseMoreHref="/archive/"
+            />
+          )}
+        </Container>
+        <Container style={{height: 'calc(100vh - 88px)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '88px'}}>
+          <h1 style={{color: 'black'}}>Section One</h1>
+        </Container>
+        <Container style={{height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+          <h1 style={{color: 'black'}}>Section Two</h1>
+        </Container>
     </Layout>
   );
 };
