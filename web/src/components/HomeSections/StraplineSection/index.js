@@ -22,12 +22,7 @@ const Strapline = styled.h1`
     text-align: left;
 `
 
-const StraplineSection = ({reffyRef}) => {
-    const straplineTl = useRef();
-    const straplineRef = useRef();
-    useEffect(() => {
-        straplineAnim(straplineRef.current, straplineTl.current)
-    }, [])
+const StraplineSection = ({straplineRef, reffyRef}) => {
     return ( 
         <FlexSection>
             <StyledStraplineWrapper ref={reffyRef}>

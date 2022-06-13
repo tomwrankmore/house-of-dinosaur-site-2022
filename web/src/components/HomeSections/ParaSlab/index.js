@@ -1,7 +1,8 @@
 import React, {useRef} from "react";
 import styled from "styled-components";
-import {device} from '../../styles/mediaQueries';
-import {colors} from '../../styles/colours'
+import {device} from '../../../styles/mediaQueries';
+import {colors} from '../../../styles/colours'
+import FlexSection from "../../FlexSection";
 
 // export const StyledHero = styled.section`
 //     background-color: ${colors.dinoOffWhite};
@@ -16,17 +17,13 @@ import {colors} from '../../styles/colours'
 //     }
 // `
 
-const NewHeroWrapper = styled.div` 
-    position: relative;
-    height: auto;
-    width: clamp(320px, 60vw, 1024px);
-`
-
 const ParallaxSlab = (props) => {
     return (
-    <div>
-        <p>💩</p>
-    </div>
+        <FlexSection>
+            <div>
+                <p>💩</p>
+            </div>
+        </FlexSection>
     )
 }
 

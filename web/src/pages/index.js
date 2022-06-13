@@ -18,6 +18,7 @@ import ProjectPreviewGrid from "../components/ProjectPreviewGrid/project-preview
 import SEO from "../components/seo";
 import Layout from "../containers/layout";
 import StraplineSection from "../components/HomeSections/StraplineSection/index"
+import ParallaxSlab from "../components/HomeSections/ParaSlab/"
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -96,6 +97,8 @@ const IndexPage = props => {
   const spinnerTl = useRef();
 
   const reffyRef = useRef()
+  const straplineRef = useRef()
+  const straplineTl = useRef();
 
   useEffect(() => {
       let rotateSetter = gsap.quickTo(spinnerRef.current, 'rotation')
@@ -113,9 +116,8 @@ const IndexPage = props => {
           }
       });
       spinnerTl.current = gsap.timeline()
-      // straplineTl.current = gsap.timeline()
       heroAnim(smoother, items, spinnerRef.current, spinnerTl.current)
-      // straplineAnim(smoother, straplineRef.current, straplineTl.current)
+      straplineAnim(smoother, straplineRef.current, straplineTl.current, reffyRef.current)
   }, [])
 
   const site = (data || {}).site;
@@ -136,7 +138,8 @@ const IndexPage = props => {
         <SEO title={site.title} description={site.description} keywords={site.keywords} />
         <Spinner ref={spinnerRef} />
         <Hero addToRefs={addToRefs} />
-        <StraplineSection reffyRef={reffyRef} />
+        <StraplineSection straplineRef={straplineRef} reffyRef={reffyRef} />
+        <ParallaxSlab />
         {/* <Container>
           <h1>Welcome to {site.title}</h1>
           {projectNodes && (

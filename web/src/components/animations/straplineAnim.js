@@ -4,7 +4,7 @@ import SplitText from "gsap/SplitText"
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
-const straplineAnim = (strapline, straplineTl  ) => {
+const straplineAnim = (smoother, strapline, straplineTl, reffyRef ) => {
   const split = new SplitText(strapline, { type: 'lines' })
   
   let tl = straplineTl
@@ -27,7 +27,7 @@ const straplineAnim = (strapline, straplineTl  ) => {
       linesClass: 'lineParent',
     });
 
-    // smoother.effects(straplineWrapperRef, { lag: 2 });
+    smoother.effects(reffyRef, { lag: 0.25 });
 
   tl.from(childLines.lines, {
       yPercent: 120,
