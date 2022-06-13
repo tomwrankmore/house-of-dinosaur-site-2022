@@ -13,6 +13,7 @@ module.exports = {
     'gatsby-plugin-postcss',
     'gatsby-plugin-image',
     'gatsby-plugin-react-helmet',
+    `gatsby-plugin-styled-components`,
     {
       resolve: 'gatsby-source-sanity',
       options: {
@@ -20,6 +21,14 @@ module.exports = {
         token,
         watchMode: !isProd,
         overlayDrafts: !isProd && token
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /assets/
+        }
       }
     }
   ]
