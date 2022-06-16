@@ -4,13 +4,13 @@
  * See: https://www.gatsbyjs.org/docs/ssr-apis/
  */
 
-const React = require("react")
-const GlobalContextProvider = require('./src/context/GlobalContextProvider')
+// const React = require("react")
+// const GlobalContextProvider = require('./src/context/GlobalContextProvider')
 
-exports.wrapRootElement = ({ element }) => {
-  return (
-     <GlobalContextProvider>
-        {element}
-     </GlobalContextProvider>
-    )
-}
+// exports.wrapRootElement = ({ element }) => {
+//   return (
+//      <GlobalContextProvider>
+//         {element}
+//      </GlobalContextProvider>
+//     )
+// }
