@@ -84,7 +84,6 @@ const IndexPage = props => {
   }
 
   const spinnerRef = useRef(null)
-  const houseRef = useRef(null)
 
   const revealRefs = useRef([]);
   revealRefs.current = [];
@@ -134,7 +133,8 @@ const IndexPage = props => {
   }
 
   return (
-    <Layout id="smooth-content">
+    <Layout>
+      <div id="smooth-content">
         <SEO title={site.title} description={site.description} keywords={site.keywords} />
         <Spinner ref={spinnerRef} />
         <Hero addToRefs={addToRefs} />
@@ -150,12 +150,13 @@ const IndexPage = props => {
             />
           )}
         </Container> */}
-        <Container style={{height: 'calc(100vh - 88px)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '88px'}}>
-          <h1 style={{color: 'black'}}>Section One</h1>
-        </Container>
-        <Container style={{height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-          <h1 style={{color: 'black'}}>Section Two</h1>
-        </Container>
+          <Container style={{height: 'calc(100vh - 88px)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '88px'}}>
+            <h1 style={{color: 'black'}}>Section One</h1>
+          </Container>
+          <Container style={{height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <h1 style={{color: 'black'}}>Section Two</h1>
+          </Container>
+        </div>
     </Layout>
   );
 };

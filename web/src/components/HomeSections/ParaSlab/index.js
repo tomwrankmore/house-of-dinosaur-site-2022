@@ -1,4 +1,5 @@
 import React, {useRef} from "react";
+import {GatsbyImage} from "gatsby-plugin-image"
 import styled from "styled-components";
 import {device} from '../../../styles/mediaQueries';
 import {colors} from '../../../styles/colours'
@@ -21,7 +22,18 @@ const ParallaxSlab = (props) => {
     return (
         <FlexSection>
             <div>
-                <p>💩</p>
+                {/* {image2 && image2.asset && (
+                    <GatsbyImage 
+                            image={image2.asset.gatsbyImageData} 
+                            alt={image2.alt}
+                            quality="50"
+                            style={{height: '100%'}}
+                            className='imgWrapper'
+                            imgClassName="imgFile"
+                            layout="fixed"
+                        />       
+                )} */}
+                gatsby image goes here
             </div>
         </FlexSection>
     )

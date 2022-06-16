@@ -13,13 +13,7 @@ const query = graphql`
 
 function LayoutContainer(props) {
   const id = props.id
-  const [showNav, setShowNav] = useState(false);
-  function handleShowNav() {
-    setShowNav(true);
-  }
-  function handleHideNav() {
-    setShowNav(false);
-  }
+
   return (
     <StaticQuery
       query={query}
@@ -32,10 +26,7 @@ function LayoutContainer(props) {
         return (
           <Layout
             {...props}
-            showNav={showNav}
             siteTitle={data.site.title}
-            onHideNav={handleHideNav}
-            onShowNav={handleShowNav}
             id={id}
           />
         );

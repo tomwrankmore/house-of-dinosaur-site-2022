@@ -3,6 +3,7 @@ import styled from "styled-components";
 import DinosaurLogo from "../DinosaurLogo";
 import OrangeWave from "../SVGComponents/orangeWave";
 import HeroLogo from "../../assets/hero-logo-full.svg";
+import Circles from "../../assets/blob-scene-haikei.svg";
 import {device} from '../../styles/mediaQueries';
 import {colors} from '../../styles/colours'
 
@@ -30,9 +31,19 @@ const StyledHeroLogo = styled(HeroLogo)`
     z-index: 10;
 `
 
+const StyledCircles = styled(Circles)` 
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+`
+
 const Hero = ({addToRefs}) => {
     return (
     <StyledHero>
+        {/* <StyledCircles /> */}
         <NewHeroWrapper>
             <StyledHeroLogo />
             <DinosaurLogo ref={addToRefs} zIndex="10" fillColor="#2ea878" />

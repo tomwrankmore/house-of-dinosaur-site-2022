@@ -1,9 +1,15 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Header from "../Header/header";
 import styled from 'styled-components'
 import { colors } from "../../styles/colours";
 
-import "../../styles/layout.css";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import ScrollSmoother from "gsap/ScrollSmoother";
+
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+import "../../styles/layout.scss";
 import * as styles from "./layout.module.css";
 
 const SiteWrapper = styled.div` 
@@ -17,10 +23,11 @@ const Content = styled.div`
   flex: 1;
 `
 
-const Layout = ({ children, onHideNav, onShowNav, showNav, siteTitle, id }) => (
+const Layout = ({ children, siteTitle, id }) => {
+  return (
   <>
-    <Header siteTitle={siteTitle} onHideNav={onHideNav} onShowNav={onShowNav} showNav={showNav} />
-    <SiteWrapper id={id} className='siteWrapper'>
+    <Header siteTitle={siteTitle} />
+    <SiteWrapper className='siteWrapper'>
       <Content>{children}</Content>
       <footer className={styles.footer}>
         <div className={styles.footerWrapper}>
@@ -33,6 +40,6 @@ const Layout = ({ children, onHideNav, onShowNav, showNav, siteTitle, id }) => (
       </footer>
     </SiteWrapper>
   </>
-);
+)};
 
 export default Layout;

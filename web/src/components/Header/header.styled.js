@@ -18,6 +18,8 @@ export const Wrapper = styled.div`
   max-width: 1980px;
   padding: 1em;
   display: flex;
+  position: relative;
+  z-index: 10;
 
   @media ${device.mediaMinSmall} {
     padding: 1.5rem 1.5rem;
@@ -45,21 +47,18 @@ export const Branding = styled.div`
 
 export const ToggleNavButton = styled.button` 
   appearance: none;
-  font-size: 25px;
+  font-size: 3rem;
   border: none;
   background: none;
   margin: 0;
   padding: calc(14 / 17 / 2 * 1rem);
   outline: none;
   color: inherit;
+  cursor: pointer;
 
   svg {
     display: block;
     fill: inherit;
-  }
-
-  @media ${device.mediaMinSmall} {
-    display: none;
   }
 `
 

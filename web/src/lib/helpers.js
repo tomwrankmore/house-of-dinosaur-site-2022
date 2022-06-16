@@ -31,3 +31,11 @@ export function buildImageObj(source) {
 
   return imageObj;
 }
+
+export const ShowScrollbar = () => {
+  document.getElementsByTagName('body')[0].classList.remove('hide-scroll');
+};
+
+export const HideScrollbar = () => {
+  document.getElementsByTagName('body')[0].classList.add('hide-scroll');
+};
