@@ -1,4 +1,8 @@
-import React from "react";
+import React, {useRef, useEffect, useState} from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import ScrollSmoother from "gsap/ScrollSmoother";
+
 import { graphql } from "gatsby";
 import Container from "../components/Container/container";
 import GraphQLErrorList from "../components/graphql-error-list";
@@ -38,6 +42,18 @@ export const query = graphql`
 
 const ArchivePage = props => {
   const { data, errors } = props;
+
+  useEffect(() => {
+    let smoother = ScrollSmoother.create({
+        content: "#smooth-content",
+        smooth: 1.5,
+        normalizeScroll: true, // prevents address bar from showing/hiding on most devices, solves various other browser inconsistencies
+        ignoreMobileResize: true, // skips ScrollTrigger.refresh() on mobile resizes from address bar showing/hiding
+        effects: true,
+        preventDefault: true,
+    });
+}, [])
+
   if (errors) {
     return (
       <Layout>
@@ -50,10 +66,12 @@ const ArchivePage = props => {
   return (
     <Layout>
       <SEO title="Archive" />
-      <Container>
-        <h1 className={responsiveTitle1}>Projects</h1>
-        {projectNodes && projectNodes.length > 0 && <ProjectPreviewGrid nodes={projectNodes} />}
-      </Container>
+      <div id="smooth-content">
+        <Container>
+          <h1 className={responsiveTitle1}>Projects</h1>
+          {projectNodes && projectNodes.length > 0 && <ProjectPreviewGrid nodes={projectNodes} />}
+        </Container>
+      </div>
     </Layout>
   );
 };

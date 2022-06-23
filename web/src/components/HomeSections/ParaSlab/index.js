@@ -1,40 +1,60 @@
-import React, {useRef} from "react";
+import React, {useEffect, useRef} from "react";
 import {GatsbyImage} from "gatsby-plugin-image"
 import styled from "styled-components";
 import {device} from '../../../styles/mediaQueries';
 import {colors} from '../../../styles/colours'
 import FlexSection from "../../FlexSection";
 
-// export const StyledHero = styled.section`
-//     background-color: ${colors.dinoOffWhite};
-//     position: relative;
-//     height: 100vh;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     width: 100vw;
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
-//   @media ${device.mediaMinSmall} {    
-//     }
-// `
+gsap.registerPlugin(ScrollTrigger);
 
-const ParallaxSlab = (props) => {
+export const ParallaxSlabWrapper = styled.div`
+    width: 100%;
+    height: 100%;
+
+  @media ${device.mediaMinSmall} {    
+    }
+`
+
+const ParallaxSlab = ({crewImage}) => {
+    const ParaSlabRef = useRef()
+    let tl = useRef(null)
+    
+    // useEffect(() => {
+    //     tl = gsap.timeline({
+    //         scrollTrigger: {
+    //             trigger: ParaSlabRef.current,
+    //             start: "top bottom",
+    //             end: "top 50%",
+    //             scrub: 0.5,
+    //             markers: true
+    //         }
+    //     })
+    
+    //     tl.to(ParaSlabRef.current, {
+    //         width: '50%',
+    //     })
+    // }, [])
+
+
     return (
-        <FlexSection>
-            <div>
-                {/* {image2 && image2.asset && (
+        <FlexSection ref={ParaSlabRef}>
+            <ParallaxSlabWrapper data-speed="0.5">
+                {crewImage && (
                     <GatsbyImage 
-                            image={image2.asset.gatsbyImageData} 
-                            alt={image2.alt}
-                            quality="50"
-                            style={{height: '100%'}}
-                            className='imgWrapper'
-                            imgClassName="imgFile"
-                            layout="fixed"
+                        data-speed="auto" 
+                        image={crewImage} 
+                        // alt={crewImage.alt}
+                        quality="50"
+                        style={{height: '100%', width: '100%'}}
+                        className='crewImage'
+                        imgClassName="crewImageFile"
+                        layout="fixed"
                         />       
-                )} */}
-                gatsby image goes here
-            </div>
+                )}
+            </ParallaxSlabWrapper>
         </FlexSection>
     )
 }

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import {device} from '../../styles/mediaQueries'
 import {colors} from '../../styles/colours'
+import WavyBurger from "../../assets/wavy-hamburger.svg";
 
 export const StyledHeader = styled.div` 
   position: fixed;
@@ -110,4 +111,8 @@ export const Nav = styled.nav`
     .showNav {
         display: block;
     }
+`
+
+export const StyledWavyBurger = styled(WavyBurger) `
+  width: 30px;
 `

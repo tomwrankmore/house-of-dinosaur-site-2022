@@ -4,11 +4,13 @@ import ScrollSmoother from "gsap/ScrollSmoother";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-const heroAnim = (smoother, items, spinnerRef, tl) => {
+const heroAnim = (smoother, items, spinnerRef, tl, tiledBgRef ) => {
   gsap.set(items, {
     visibility: 'hidden',
     yPercent: 200,
   })
+
+  smoother.effects(tiledBgRef, { lag: 0.1 });
 
   tl.to(items, {
     autoAlpha: 1,

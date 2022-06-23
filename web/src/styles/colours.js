@@ -8,7 +8,7 @@ export const colors = {
     colorAccent: "#156dff",
     darkDinoGreen: "#14463D",
     dinoGreen: "#2EA878",
-    darkSand: "#FD803B",
+    dinoSand: "#FD803B",
     dinoSunshine: "#FCCC43",
     dinoAqua: "#9BDFD0",
     dinoSky: "#4F9DE6",

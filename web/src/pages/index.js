@@ -1,5 +1,6 @@
 import React, {useRef, useEffect, useState} from "react";
 import gsap from "gsap";
+import { getImage, GatsbyImage } from "gatsby-plugin-image"
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollSmoother from "gsap/ScrollSmoother";
 
@@ -18,11 +19,12 @@ import ProjectPreviewGrid from "../components/ProjectPreviewGrid/project-preview
 import SEO from "../components/seo";
 import Layout from "../containers/layout";
 import StraplineSection from "../components/HomeSections/StraplineSection/index"
-import ParallaxSlab from "../components/HomeSections/ParaSlab/"
+import IntroSection from "../components/HomeSections/IntroSection/"
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 import Spinner from '../components/SVGComponents/spinner'
+import FlexSection from "../components/FlexSection";
 
 export const query = graphql`
   query IndexPageQuery {
@@ -30,6 +32,14 @@ export const query = graphql`
       title
       description
       keywords
+    }
+    crew: file(relativePath: {eq: "leanback.jpg"}) {
+      id
+      childImageSharp {
+        gatsbyImageData(
+          quality: 50, 
+          webpOptions: {quality: 70})
+      }
     }
     projects: allSanitySampleProject(
       limit: 6
@@ -75,6 +85,8 @@ export const query = graphql`
 const IndexPage = props => {
   const { data, errors } = props;
 
+  const crewImage = getImage(data.crew);
+
   if (errors) {
     return (
       <Layout>
@@ -95,7 +107,8 @@ const IndexPage = props => {
   const items = revealRefs.current;
   const spinnerTl = useRef();
 
-  const reffyRef = useRef()
+  const strapRef = useRef()
+  const tiledBgRef = useRef()
   const straplineRef = useRef()
   const straplineTl = useRef();
 
@@ -115,8 +128,8 @@ const IndexPage = props => {
           }
       });
       spinnerTl.current = gsap.timeline()
-      heroAnim(smoother, items, spinnerRef.current, spinnerTl.current)
-      straplineAnim(smoother, straplineRef.current, straplineTl.current, reffyRef.current)
+      heroAnim(smoother, items, spinnerRef.current, spinnerTl.current, tiledBgRef.current)
+      straplineAnim(smoother, straplineRef.current, straplineTl.current, strapRef.current)
   }, [])
 
   const site = (data || {}).site;
@@ -137,9 +150,9 @@ const IndexPage = props => {
       <div id="smooth-content">
         <SEO title={site.title} description={site.description} keywords={site.keywords} />
         <Spinner ref={spinnerRef} />
-        <Hero addToRefs={addToRefs} />
-        <StraplineSection straplineRef={straplineRef} reffyRef={reffyRef} />
-        <ParallaxSlab />
+        <Hero addToRefs={addToRefs} tiledBgRef={tiledBgRef} />
+        <StraplineSection straplineRef={straplineRef} strapRef={strapRef} />
+        {/* <ParallaxSlab crewImage={crewImage} /> */}
         {/* <Container>
           <h1>Welcome to {site.title}</h1>
           {projectNodes && (
@@ -150,12 +163,10 @@ const IndexPage = props => {
             />
           )}
         </Container> */}
-          <Container style={{height: 'calc(100vh - 88px)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '88px'}}>
-            <h1 style={{color: 'black'}}>Section One</h1>
-          </Container>
-          <Container style={{height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-            <h1 style={{color: 'black'}}>Section Two</h1>
-          </Container>
+        <IntroSection crewImage={crewImage} />
+        <FlexSection>
+        💩
+        </FlexSection>
         </div>
     </Layout>
   );
