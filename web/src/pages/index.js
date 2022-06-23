@@ -3,6 +3,9 @@ import gsap from "gsap";
 import { getImage, GatsbyImage } from "gatsby-plugin-image"
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollSmoother from "gsap/ScrollSmoother";
+import styled from "styled-components";
+
+import { roll } from '../lib/helpers';
 
 import { graphql } from "gatsby";
 import {
@@ -82,6 +85,57 @@ export const query = graphql`
   }
 `;
 
+const WrapperRollingText = styled.div` 
+  white-space: nowrap;
+  border-top: 1px solid #6f6f6f;
+`
+
+const RollingText = styled.div` 
+  font-size: 6vw;
+  display: inline-block;
+  padding-left: 10px;
+`
+
+const WrapperRollingText02 = styled.div` 
+  white-space: nowrap;
+  /* font-family: 'Playfair Display', serif; */
+  margin-top: 10px;
+`
+
+const RollingText02 = styled.div` 
+  font-size: 6vw;
+  display: inline-block;
+  padding-left: 13px;
+`
+
+const RollingLogos = styled.div` 
+  width: 100vw;
+  height: 100vh;
+  overflow-x:hidden;
+  position: relative;
+
+    .rollingText {
+      font-size: 6vw;
+      display: inline-block;
+      padding-left: 10px;
+    }
+    .wrapperRollingText02 {
+      white-space: nowrap;
+      /* font-family: 'Playfair Display', serif; */
+      margin-top: 10px;
+    }
+    .rollingText02 {
+      font-size: 6vw;
+      display: inline-block;
+      padding-left: 13px;
+    }
+    span{
+      font-family:sans-serif;
+      font-weight:600;
+      color:green;
+    }
+`
+
 const IndexPage = props => {
   const { data, errors } = props;
 
@@ -94,6 +148,9 @@ const IndexPage = props => {
       </Layout>
     );
   }
+
+  const rollingTextRef1 = useRef()
+  const rollingTextRef2 = useRef()
 
   const spinnerRef = useRef(null)
 
@@ -115,6 +172,7 @@ const IndexPage = props => {
   useEffect(() => {
       let rotateSetter = gsap.quickTo(spinnerRef.current, 'rotation')
       let clamp = gsap.utils.clamp(-1080, 1080)
+      let direction = 1; // 1 = forward, -1 = backward scroll
     
       let smoother = ScrollSmoother.create({
           content: "#smooth-content",
@@ -130,6 +188,18 @@ const IndexPage = props => {
       spinnerTl.current = gsap.timeline()
       heroAnim(smoother, items, spinnerRef.current, spinnerTl.current, tiledBgRef.current)
       straplineAnim(smoother, straplineRef.current, straplineTl.current, strapRef.current)
+
+      const roll1 = roll(rollingTextRef1.current, {duration: 10})
+      const roll2 = roll(rollingTextRef2.current, {duration: 10}, true)
+      const scroll = ScrollTrigger.create({
+        onUpdate(self) {
+          if (self.direction !== direction) {
+            direction *= -1;
+            gsap.to([roll1, roll2], {timeScale: direction, overwrite: true});
+          }
+        }
+      });
+
   }, [])
 
   const site = (data || {}).site;
@@ -164,9 +234,21 @@ const IndexPage = props => {
           )}
         </Container> */}
         <IntroSection crewImage={crewImage} />
-        <FlexSection>
-        💩
-        </FlexSection>
+
+        <RollingLogos>
+          <WrapperRollingText>
+            <RollingText class="text" ref={rollingTextRef1}>
+              <span>• Client •</span> Client, professional-grade Client for the modern web
+            </RollingText>
+          </WrapperRollingText>
+
+          {/* <WrapperRollingText02 ref={rollingTextRef2}>
+            <RollingText02 class="text">
+              <span>• GreenSock •</span> Ultra high-performance, professional-grade animation for the modern web
+            </RollingText02>
+          </WrapperRollingText02> */}
+        </RollingLogos>
+          
         </div>
     </Layout>
   );

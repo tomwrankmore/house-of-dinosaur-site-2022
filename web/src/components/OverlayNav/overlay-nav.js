@@ -39,7 +39,7 @@ export const MenuShadowLayer = styled.div`
 `
 export const MenuLayer = styled.div`
   position: relative;
-  background: ${colors.darkSand};
+  background-color: ${colors.dinoSky};
   height: 100%;
   overflow: hidden;
 `

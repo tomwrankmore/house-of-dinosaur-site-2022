@@ -4,35 +4,43 @@ import MadeOfPlayLogo from '../../../assets/made-of-play-logo-white.svg'
 
 import styled from "styled-components";
 import { colors } from "../../../styles/colours";
+import {device} from '../../../styles/mediaQueries'
+
 
 const StyledSectionStrapline = styled.div` 
     width: 100vw;
     height: 100%;
-    min-height: 100vh;
+    min-height: 75vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     position: relative;
     overflow: hidden;
     background-color: ${colors.darkDinoGreen};
     transform: translateY(-1px);
+    padding-top: 5vh;
 `
 
 const StyledStraplineWrapper = styled.div` 
     position: relative;
-    /* background-color: #ffffff5c; */
     padding: 0rem 2rem;
-    /* border-radius: 1rem;
-    box-shadow: 10px 10px 0px 0px ${colors.dinoAqua};
-    border: solid 0.5rem ${colors.dinoAqua}; */
     max-width: 65vw;
     width: 100%;
 `
 
 const StraplineText = styled.h1` 
     color: ${colors.dinoSnow};
-    font-size: clamp(1.5rem, 2.5vw, 4rem); 
+    
+    @media ${device.mediaMinSmall} {  
+        font-size: 3rem;  
+    }
+    @media ${device.mediaMinMedium} { 
+        font-size: 3.25rem;     
+    }
+    @media ${device.mediaMinLarge} { 
+        font-size: 3.5rem;        
+    }
     text-align: center;
     font-family: "Syne Bold";
 `
