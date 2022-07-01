@@ -64,7 +64,7 @@ const RightColumn = styled.div`
     justify-content: flex-end;
 `
 
-const IntroSection = ({crewImage}) => {
+const IntroSection = ({dinoFlagImg}) => {
     const introSectionRef = useRef()
     const tl = useRef()
 
@@ -108,10 +108,10 @@ const IntroSection = ({crewImage}) => {
                         <p className={classNames({paragraph},'introP')}>So, if you've never played Disco Dodgeball in the desert dressed as a dinosaur dancing to DJs, get in touch.</p>
                     </LeftColumn>
                     <RightColumn>
-                        {crewImage && (
+                        {dinoFlagImg && (
                             <GatsbyImage 
                                 data-speed="auto" 
-                                image={crewImage} 
+                                image={dinoFlagImg} 
                                 alt=""
                                 quality="50"
                                 style={{height: '100%', width: '100%', border: 'solid 0.5rem #14463D', boxShadow: '10px 10px 0px 0px #14463D'}}

@@ -9,6 +9,8 @@ import category from './documents/category'
 import person from './documents/person'
 import sampleProject from './documents/sampleProject'
 import parallaxImage from './documents/parallaxImg'
+import clientBrandLogo from './documents/clientBrandLogos'
+import clientFestivalLogo from './documents/clientFestivalLogos'
 import siteSettings from './documents/siteSettings'
 
 // Object types
@@ -38,6 +40,8 @@ export default createSchema({
     person,
     sampleProject,
     parallaxImage,
+    clientBrandLogo,
+    clientFestivalLogo,
     siteSettings
   ])
 })

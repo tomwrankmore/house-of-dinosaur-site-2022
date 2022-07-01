@@ -46,6 +46,14 @@ export const query = graphql`
           webpOptions: {quality: 70})
       }
     }
+    dinoFlag: file(relativePath: {eq: "dinoflag.png"}) {
+      id
+      childImageSharp {
+        gatsbyImageData(
+          quality: 50, 
+          webpOptions: {quality: 70})
+      }
+    }
     projects: allSanitySampleProject(
       limit: 6
       sort: { fields: [publishedAt], order: DESC }
@@ -91,6 +99,8 @@ const IndexPage = props => {
   const { data, errors } = props;
 
   const crewImage = getImage(data.crew);
+  const dinoFlagImg = getImage(data.dinoFlag);
+
 
   if (errors) {
     return (
@@ -149,7 +159,7 @@ const IndexPage = props => {
         <Spinner ref={spinnerRef} />
         <Hero tiledBgRef={tiledBgRef} ref={heroRef} />
         <StraplineSection ref={straplineSectionRef} />
-        <IntroSection crewImage={crewImage} />
+        <IntroSection dinoFlagImg={dinoFlagImg} />
         <HouseDivider />
         <ClientSection />
         <ClientSection2 />
