@@ -109,7 +109,8 @@ const ClientSection = () => {
                             asset {
                                 gatsbyImageData(
                                     formats: AUTO, 
-                                    width: 500
+                                    width: 500,
+                                    placeholder: BLURRED
                                 )
                             }
                             alt
@@ -125,10 +126,10 @@ const ClientSection = () => {
 
     const clientLogoNodes =
     data && data.clientLogos && mapEdgesToNodes(data.clientLogos)
+    let timeline = tl.current
+    let q = gsap.utils.selector(clientSectionRef.current)
 
     useEffect(() => {
-        let timeline = tl.current
-        let q = gsap.utils.selector(clientSectionRef.current)
         gsap.set(q('.clientLogo'), {
             visibility: 'hidden',
             yPercent: 50,
@@ -162,7 +163,7 @@ const ClientSection = () => {
         <ClientContainer ref={clientSectionRef}>
             <Column>
                 <h1>We work with brands!</h1>
-                <p style={{maxWidth: '50%'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae explicabo iusto quaerat alias tempora sit modi accusamus dolores iste laboriosam? Voluptatibus explicabo id, neque ea necessitatibus possimus itaque beatae laboriosam.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae explicabo iusto quaerat alias tempora sit modi accusamus dolores iste laboriosam? Voluptatibus explicabo id, neque ea necessitatibus possimus itaque beatae laboriosam.</p>
             </Column>
             <Column>
                 <TiledBackground>

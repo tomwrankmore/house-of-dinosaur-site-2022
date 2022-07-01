@@ -67,11 +67,10 @@ const RightColumn = styled.div`
 const IntroSection = ({dinoFlagImg}) => {
     const introSectionRef = useRef()
     const tl = useRef()
+    let timeline = tl.current
+    let q = gsap.utils.selector(introSectionRef.current)
 
     useEffect(() => {
-        let timeline = tl.current
-        let q = gsap.utils.selector(introSectionRef.current)
-        
         gsap.set(q('.introP'), {
             visibility: 'hidden',
             yPercent: 120,

@@ -111,7 +111,8 @@ const ClientSection2 = () => {
                             asset {
                                 gatsbyImageData(
                                     formats: AUTO, 
-                                    width: 500
+                                    width: 500,
+                                    placeholder: BLURRED
                                 )
                             }
                             alt
@@ -127,10 +128,10 @@ const ClientSection2 = () => {
 
     const clientLogoNodes =
     data && data.clientLogos && mapEdgesToNodes(data.clientLogos)
+    let timeline = tl.current
+    let q = gsap.utils.selector(clientSectionRef.current)
 
     useEffect(() => {
-        let timeline = tl.current
-        let q = gsap.utils.selector(clientSectionRef.current)
         gsap.set(q('.clientLogo'), {
             visibility: 'hidden',
             yPercent: 50,
