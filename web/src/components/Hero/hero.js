@@ -80,7 +80,7 @@ const TiledBackground = styled.div`
     }
 `
 
-const Hero = ({addToRefs, tiledBgRef}) => {
+const Hero = React.forwardRef(({addToRefs, tiledBgRef}, ref) => {
 
     const data = useStaticQuery(
         graphql`
@@ -110,27 +110,25 @@ const Hero = ({addToRefs, tiledBgRef}) => {
     const tiledBG = getImage(data.tiledMadeOfPlayImage);
     const heroLineBgImg = getImage(data.heroWavyLineBG);
 
-    console.log('heroLineBgImg: ', heroLineBgImg)
-
     return (
-    <StyledHero>
+    <StyledHero ref={ref}>
         <TiledBackground ref={tiledBgRef}>
-            <BgImage image={tiledBG} className="background-image" style={{ backgroundRepeat: 'repeat', backgroundSize: '200'}} />
+            <BgImage image={tiledBG} className="background-image" style={{ backgroundRepeat: 'repeat', backgroundSize: '200'}}/>
         </TiledBackground>
         <WavyLine>
             <BgImage image={heroLineBgImg} className="background-image" style={{ backgroundRepeat: 'repeat-x', backgroundSize: 'contain'}} />
         </WavyLine>
         <NewHeroWrapper>
             <StyledHeroLogo />
-            <DinoLogoWrapper ref={addToRefs} style={{zIndex:"10"}}><DinosaurLogo fillColor="#2ea878" /></DinoLogoWrapper>
-            <DinoLogoWrapper ref={addToRefs} style={{zIndex:"9"}}><DinosaurLogo fillColor="#fd803b" /></DinoLogoWrapper>
-            <DinoLogoWrapper ref={addToRefs} style={{zIndex:"8"}}><DinosaurLogo fillColor="#fccc43" /></DinoLogoWrapper>
-            <DinoLogoWrapper ref={addToRefs} style={{zIndex:"7"}}><DinosaurLogo fillColor="#9bdfd0" /></DinoLogoWrapper>
-            <DinoLogoWrapper ref={addToRefs} style={{zIndex:"6"}}><DinosaurLogo fillColor="#4f9de6" /></DinoLogoWrapper>
+            <DinoLogoWrapper style={{zIndex:"10"}} className='box'><DinosaurLogo fillColor="#2ea878" /></DinoLogoWrapper>
+            <DinoLogoWrapper style={{zIndex:"9"}} className='box'><DinosaurLogo fillColor="#fd803b" /></DinoLogoWrapper>
+            <DinoLogoWrapper style={{zIndex:"8"}} className='box'><DinosaurLogo fillColor="#fccc43" /></DinoLogoWrapper>
+            <DinoLogoWrapper style={{zIndex:"7"}} className='box'><DinosaurLogo fillColor="#9bdfd0" /></DinoLogoWrapper>
+            <DinoLogoWrapper style={{zIndex:"6"}} className='box'><DinosaurLogo fillColor="#4f9de6" /></DinoLogoWrapper>
         </NewHeroWrapper>
         <HeroWave fill={colors.darkDinoGreen} />
     </StyledHero>
     )
-}
+})
 
 export default Hero; 

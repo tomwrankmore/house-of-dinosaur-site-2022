@@ -14,7 +14,6 @@ export const StyledHeader = styled.div`
 `
 
 export const Wrapper = styled.div` 
-  box-sizing: border-box;
   margin: 0 auto;
   max-width: 1980px;
   padding: 1em;

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components'
+import { device } from "../../styles/mediaQueries";
 
 const StyledSpinner = styled.svg` 
     position: fixed;
@@ -8,6 +9,10 @@ const StyledSpinner = styled.svg`
     width: 220px;
     height: 220px;
     z-index: 1000;
+    display: none;
+    @media ${device.mediaMinMedium} {  
+        display: block;
+    }
 `
 
 const Spinner = React.forwardRef((props, ref) => {

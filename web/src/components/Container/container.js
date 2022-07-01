@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import {device} from '../../styles/mediaQueries'
 
 const StyledContainer = styled.div` 
-  box-sizing: border-box;
   max-width: 1980px;
   width: 100%;
   height: 100%;

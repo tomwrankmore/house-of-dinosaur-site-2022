@@ -9,12 +9,12 @@ import {device} from '../../../styles/mediaQueries'
 
 const StyledSectionStrapline = styled.div` 
     width: 100vw;
-    height: 100%;
-    min-height: 75vh;
+    height: clamp(75vh, 100vh, 1024px);
+    /* min-height: 100vh; */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     position: relative;
     overflow: hidden;
     background-color: ${colors.darkDinoGreen};
@@ -25,42 +25,39 @@ const StyledSectionStrapline = styled.div`
 const StyledStraplineWrapper = styled.div` 
     position: relative;
     padding: 0rem 2rem;
-    max-width: 65vw;
+    max-width: 100vw;
     width: 100%;
+    @media ${device.mediaMinMedium} {  
+        max-width: 75vw;
+    }
 `
 
 const StraplineText = styled.h1` 
     color: ${colors.dinoSnow};
+    font-size: 1.875rem;  
     
-    @media ${device.mediaMinSmall} {  
-        font-size: 3rem;  
-    }
-    @media ${device.mediaMinMedium} { 
-        font-size: 3.25rem;     
-    }
-    @media ${device.mediaMinLarge} { 
-        font-size: 3.5rem;        
+    @media ${device.mediaMinMedium} {  
+        font-size: 2.875rem;  
     }
     text-align: center;
-    font-family: "Syne Bold";
-`
-
-const TiledBackground = styled.div` 
-    position: absolute;
-    top: -50%;
-    bottom: -50%;
-    left: 0;
-    right: 0;
-    opacity: 0.25;
-    .background-image {
-        width: 100%;
-        min-height: 100%;
-    }
+    /* font-family: "Syne Bold"; */
 `
 
 const StrapSquiggle = styled.div` 
     width: 100%;
     height: 20px;
+    @media ${device.mediaMinMedium} {  
+        height: 30px;
+    }
+    @media ${device.mediaMinLarge} {  
+        height: 40px;
+    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+        height: 100%;
+    }
 `
 
 const MadeOfPlayLogoWrapper = styled.div` 
@@ -80,23 +77,23 @@ const MadeOfPlayLogoWrapper = styled.div`
     }
 `
 
-const StraplineSection = ({straplineRef, strapRef}) => {
+const StraplineSection = React.forwardRef((props, ref) => {
     return ( 
-        <StyledSectionStrapline>
-            <StyledStraplineWrapper ref={strapRef}>
-            <StrapSquiggle>
-                <OrangeSquiggle />
-            </StrapSquiggle>
-                <StraplineText ref={straplineRef}>We engineer story driven parties and captivating activations that make the audience the star of the show.</StraplineText>
-            <StrapSquiggle>
-                <OrangeSquiggle />
-            </StrapSquiggle>
+        <StyledSectionStrapline ref={ref}>
+            <StyledStraplineWrapper>
+                <StrapSquiggle>
+                    <OrangeSquiggle />
+                </StrapSquiggle>
+                    <StraplineText className="straplineText">We engineer story driven parties and captivating activations that make the audience the star of the show.</StraplineText>
+                <StrapSquiggle>
+                    <OrangeSquiggle />
+                </StrapSquiggle>
             </StyledStraplineWrapper>
             <MadeOfPlayLogoWrapper>
                 <MadeOfPlayLogo className="graphic"/>
             </MadeOfPlayLogoWrapper>
         </StyledSectionStrapline>
     )
-}
+})
 
 export default StraplineSection; 

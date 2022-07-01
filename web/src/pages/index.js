@@ -1,11 +1,9 @@
 import React, {useRef, useEffect, useState} from "react";
-import gsap from "gsap";
 import { getImage, GatsbyImage } from "gatsby-plugin-image"
+import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollSmoother from "gsap/ScrollSmoother";
 import styled from "styled-components";
-
-import { roll } from '../lib/helpers';
 
 import { graphql } from "gatsby";
 import {
@@ -22,7 +20,11 @@ import ProjectPreviewGrid from "../components/ProjectPreviewGrid/project-preview
 import SEO from "../components/seo";
 import Layout from "../containers/layout";
 import StraplineSection from "../components/HomeSections/StraplineSection/index"
+import HouseDivider from "../components/HomeSections/HouseOfDivider"
 import IntroSection from "../components/HomeSections/IntroSection/"
+import ClientSection from "../components/HomeSections/ClientSection/"
+import ClientSection2 from "../components/HomeSections/ClientSectiont2/"
+
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -85,57 +87,6 @@ export const query = graphql`
   }
 `;
 
-const WrapperRollingText = styled.div` 
-  white-space: nowrap;
-  border-top: 1px solid #6f6f6f;
-`
-
-const RollingText = styled.div` 
-  font-size: 6vw;
-  display: inline-block;
-  padding-left: 10px;
-`
-
-const WrapperRollingText02 = styled.div` 
-  white-space: nowrap;
-  /* font-family: 'Playfair Display', serif; */
-  margin-top: 10px;
-`
-
-const RollingText02 = styled.div` 
-  font-size: 6vw;
-  display: inline-block;
-  padding-left: 13px;
-`
-
-const RollingLogos = styled.div` 
-  width: 100vw;
-  height: 100vh;
-  overflow-x:hidden;
-  position: relative;
-
-    .rollingText {
-      font-size: 6vw;
-      display: inline-block;
-      padding-left: 10px;
-    }
-    .wrapperRollingText02 {
-      white-space: nowrap;
-      /* font-family: 'Playfair Display', serif; */
-      margin-top: 10px;
-    }
-    .rollingText02 {
-      font-size: 6vw;
-      display: inline-block;
-      padding-left: 13px;
-    }
-    span{
-      font-family:sans-serif;
-      font-weight:600;
-      color:green;
-    }
-`
-
 const IndexPage = props => {
   const { data, errors } = props;
 
@@ -149,30 +100,17 @@ const IndexPage = props => {
     );
   }
 
-  const rollingTextRef1 = useRef()
-  const rollingTextRef2 = useRef()
-
   const spinnerRef = useRef(null)
-
-  const revealRefs = useRef([]);
-  revealRefs.current = [];
-  const addToRefs = (el) => {
-      if(el && !revealRefs.current.includes(el)) {
-          revealRefs.current.push(el)
-      }
-  };
-  const items = revealRefs.current;
   const spinnerTl = useRef();
-
-  const strapRef = useRef()
+  const heroRef = useRef()
+  const straplineSectionRef = useRef()
+  
   const tiledBgRef = useRef()
-  const straplineRef = useRef()
   const straplineTl = useRef();
 
   useEffect(() => {
       let rotateSetter = gsap.quickTo(spinnerRef.current, 'rotation')
       let clamp = gsap.utils.clamp(-1080, 1080)
-      let direction = 1; // 1 = forward, -1 = backward scroll
     
       let smoother = ScrollSmoother.create({
           content: "#smooth-content",
@@ -186,19 +124,8 @@ const IndexPage = props => {
           }
       });
       spinnerTl.current = gsap.timeline()
-      heroAnim(smoother, items, spinnerRef.current, spinnerTl.current, tiledBgRef.current)
-      straplineAnim(smoother, straplineRef.current, straplineTl.current, strapRef.current)
-
-      const roll1 = roll(rollingTextRef1.current, {duration: 10})
-      const roll2 = roll(rollingTextRef2.current, {duration: 10}, true)
-      const scroll = ScrollTrigger.create({
-        onUpdate(self) {
-          if (self.direction !== direction) {
-            direction *= -1;
-            gsap.to([roll1, roll2], {timeScale: direction, overwrite: true});
-          }
-        }
-      });
+      heroAnim(smoother, spinnerRef.current, spinnerTl.current, tiledBgRef.current, heroRef.current)
+      straplineAnim(smoother, straplineSectionRef.current, straplineTl.current)
 
   }, [])
 
@@ -220,9 +147,18 @@ const IndexPage = props => {
       <div id="smooth-content">
         <SEO title={site.title} description={site.description} keywords={site.keywords} />
         <Spinner ref={spinnerRef} />
-        <Hero addToRefs={addToRefs} tiledBgRef={tiledBgRef} />
-        <StraplineSection straplineRef={straplineRef} strapRef={strapRef} />
-        {/* <ParallaxSlab crewImage={crewImage} /> */}
+        <Hero tiledBgRef={tiledBgRef} ref={heroRef} />
+        <StraplineSection ref={straplineSectionRef} />
+        <IntroSection crewImage={crewImage} />
+        <HouseDivider />
+        <ClientSection />
+        <ClientSection2 />
+        <div style={{height: '100vh'}}>
+          spacer
+        </div>
+        <div style={{height: '100vh'}}>
+          spacer
+        </div>
         {/* <Container>
           <h1>Welcome to {site.title}</h1>
           {projectNodes && (
@@ -233,23 +169,7 @@ const IndexPage = props => {
             />
           )}
         </Container> */}
-        <IntroSection crewImage={crewImage} />
-
-        <RollingLogos>
-          <WrapperRollingText>
-            <RollingText class="text" ref={rollingTextRef1}>
-              <span>• Client •</span> Client, professional-grade Client for the modern web
-            </RollingText>
-          </WrapperRollingText>
-
-          {/* <WrapperRollingText02 ref={rollingTextRef2}>
-            <RollingText02 class="text">
-              <span>• GreenSock •</span> Ultra high-performance, professional-grade animation for the modern web
-            </RollingText02>
-          </WrapperRollingText02> */}
-        </RollingLogos>
-          
-        </div>
+      </div>
     </Layout>
   );
 };
