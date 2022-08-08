@@ -35,6 +35,7 @@ const StyledStraplineWrapper = styled.div`
 const StraplineText = styled.h1` 
     color: ${colors.dinoSnow};
     font-size: 1.875rem;  
+    font-weight: bold;
     
     @media ${device.mediaMinMedium} {  
         font-size: 2.875rem;  

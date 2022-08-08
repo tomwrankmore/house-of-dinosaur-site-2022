@@ -29,7 +29,6 @@ const ParallaxSlab = ({crewImage}) => {
     //             start: "top bottom",
     //             end: "top 50%",
     //             scrub: 0.5,
-    //             markers: true
     //         }
     //     })
     
@@ -44,9 +43,8 @@ const ParallaxSlab = ({crewImage}) => {
             <ParallaxSlabWrapper data-speed="0.5">
                 {crewImage && (
                     <GatsbyImage 
-                        data-speed="auto" 
                         image={crewImage} 
-                        // alt={crewImage.alt}
+                        alt=""
                         quality="50"
                         style={{height: '100%', width: '100%'}}
                         className='crewImage'

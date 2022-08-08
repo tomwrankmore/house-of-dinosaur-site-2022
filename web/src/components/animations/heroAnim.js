@@ -6,8 +6,6 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 const heroAnim = (smoother, spinnerRef, tl, tiledBgRef, heroRef ) => {
 
-  console.log('heroRef: ', heroRef)
-
   let q = gsap.utils.selector(heroRef)
 
   gsap.set(q('.box'), {
@@ -27,7 +25,7 @@ const heroAnim = (smoother, spinnerRef, tl, tiledBgRef, heroRef ) => {
   q('.box').forEach((item, i) => {
       smoother.effects(item, { lag: i * 0.75 });
   });
-  smoother.effects(spinnerRef, { lag: 0.5 });
+  // smoother.effects(spinnerRef, { lag: 0.5 });
   }
 
   export default heroAnim;

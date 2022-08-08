@@ -14,12 +14,12 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 import styled from "styled-components";
 import { colors } from "../../../styles/colours";
 import { device } from '../../../styles/mediaQueries';
+import { paragraph, responsiveTitle1, responsiveTitle3 } from "../../../components/typography.module.css";
 
 const ClientContainer = styled.div` 
   max-width: 1980px;
   width: 100%;
-  height: 100%;
-  /* min-height: 100vh; */
+  height: clamp(650px, 85vh, 760px);
   padding: 0;
   margin: 0 auto;
   display: flex;
@@ -39,11 +39,11 @@ const Column = styled.div`
     justify-content: center;
     flex: 1;
     flex-direction: column;
-    height: 100vh;
     position: relative;
     overflow: hidden;
     padding: 2rem;
     width: 100%;
+    height: 100%;
 `
 const TiledBackground = styled.div` 
     position: absolute;
@@ -83,10 +83,27 @@ const ClientLogos = styled.ul`
     }
 `
 
-const ClientSection = () => {
-    
-    const clientSectionRef = useRef()
-    const tl = useRef()
+const ClientScroller = styled.div`
+    width: fit-content;
+    height: 150px;
+    /* background-color: hotpink; */
+    display: flex;
+    overflow: hidden;
+`
+
+const ClientBlock = styled.ul` 
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 150vw;
+
+    li {
+        padding: 0 2rem;
+    }
+`
+
+const ClientSection = React.forwardRef(({clientData1}, ref) => {
 
     const data = useStaticQuery(
         graphql`
@@ -101,101 +118,110 @@ const ClientSection = () => {
                     )
                 }
             }
-            clientLogos: allSanityClientBrandLogo {
-                edges {
-                    node {
-                        id
-                        image {
-                            asset {
-                                gatsbyImageData(
-                                    formats: AUTO, 
-                                    width: 500,
-                                    placeholder: BLURRED
-                                )
-                            }
-                            alt
-                        }
-                    }
-                }
-            }
         }
         `
       );
 
     const tiledBG = getImage(data.tiledMadeOfPlayImage);
 
-    const clientLogoNodes =
-    data && data.clientLogos && mapEdgesToNodes(data.clientLogos)
-    let timeline = tl.current
-    let q = gsap.utils.selector(clientSectionRef.current)
-
-    useEffect(() => {
-        gsap.set(q('.clientLogo'), {
-            visibility: 'hidden',
-            yPercent: 50,
-            xPercent: 10
-        })
-        timeline = gsap.timeline({
-            defaults: { ease: "power4.out" },
-            
-            scrollTrigger: {
-                trigger: clientSectionRef.current,
-                start: 'top 50%',
-                // end: 'bottom 50%',
-                // scrub: true,
-                toggleActions: 'play none none reverse',
-                
-            }
-        })
-        timeline.to(q('.clientLogo'), {
-            yPercent: 0,
-            xPercent: 0,
-            autoAlpha: 1,
-            // duration: 2,
-            stagger: {
-              amount: 0.25,
-              each: 0.1,
-            },
-        })
-    }, [])
-
     return (
-        <ClientContainer ref={clientSectionRef}>
-            <Column>
-                <h1>We work with brands!</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae explicabo iusto quaerat alias tempora sit modi accusamus dolores iste laboriosam? Voluptatibus explicabo id, neque ea necessitatibus possimus itaque beatae laboriosam.</p>
-            </Column>
-            <Column>
-                <TiledBackground>
-                    <BgImage image={tiledBG} className="background-image" style={{ backgroundRepeat: 'repeat', backgroundSize: '30px'}}/>
-                </TiledBackground>
-                {
-                    data && data.clientLogos && 
-                    <ClientLogos>
-                        {clientLogoNodes.map((logo, idx) => {
-                            return (
-                                <li key={idx} className='clientLogo'>
-                                    <GatsbyImage 
-                                        data-speed="auto" 
-                                        image={logo.image.asset.gatsbyImageData} 
-                                        alt={logo.alt}
-                                        quality="50"
-                                        style={{height: '100%', width: '100%'}}
-                                        className='clientLogoImg'
-                                        imgClassName="clientLogoImgFile"
-                                        layout="fixed"
-                                        objectFit="contain"
-                                        placeholder="blurred"
-                                        
-                                    />
-                                </li>
-                            )
-                        })}
-                    </ClientLogos>
-                }
-            </Column>
-        </ClientContainer>
+        <div ref={ref}>
+            <ClientContainer>
+                <Column>
+                    <h1 className={responsiveTitle1}>Brand Partnerships</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae explicabo iusto quaerat alias tempora sit modi accusamus dolores iste laboriosam? Voluptatibus explicabo id, neque ea necessitatibus possimus itaque beatae laboriosam.</p>
+                </Column>
+                <Column>
+                    <TiledBackground>
+                        <BgImage image={tiledBG} className="background-image" style={{ backgroundRepeat: 'repeat', backgroundSize: '30px'}}/>
+                    </TiledBackground>
+                        <ClientLogos>
+                            {clientData1.map((logo, idx) => {
+                                return (
+                                    <li key={idx} className='clientLogo'>
+                                        <GatsbyImage 
+                                            image={logo.image.asset.gatsbyImageData} 
+                                            alt="Logo"
+                                            quality="50"
+                                            style={{height: '100%', width: '100%'}}
+                                            className='clientLogoImg'
+                                            imgClassName="clientLogoImgFile"
+                                            layout="fixed"
+                                            objectFit="contain"
+                                            placeholder="blurred"
+                                            
+                                        />
+                                    </li>
+                                )
+                            })}
+                        </ClientLogos>
+                </Column>
+            </ClientContainer>
+            <ClientScroller className="clientScroller">
+                <ClientBlock className="clientBlock">
+                    {clientData1.map((logo, idx) => {
+                        return (
+                            <li key={idx} className='clientLogo'>
+                                <GatsbyImage 
+                                    image={logo.image.asset.gatsbyImageData} 
+                                    alt="Logo"
+                                    quality="50"
+                                    style={{height: '100%', width: '100%'}}
+                                    className='clientLogoImg'
+                                    imgClassName="clientLogoImgFile"
+                                    layout="fixed"
+                                    objectFit="contain"
+                                    placeholder="blurred"
+                                    
+                                />
+                            </li>
+                        )
+                    })}
+                </ClientBlock>
+                <ClientBlock className="clientBlock">
+                    {clientData1.map((logo, idx) => {
+                        return (
+                            <li key={idx} className='clientLogo'>
+                                <GatsbyImage 
+                                    image={logo.image.asset.gatsbyImageData} 
+                                    alt="Logo"
+                                    quality="50"
+                                    style={{height: '100%', width: '100%'}}
+                                    className='clientLogoImg'
+                                    imgClassName="clientLogoImgFile"
+                                    layout="fixed"
+                                    objectFit="contain"
+                                    placeholder="blurred"
+                                    
+                                />
+                            </li>
+                        )
+                    })}
+                </ClientBlock>
+                <ClientBlock className="clientBlock">
+                    {clientData1.map((logo, idx) => {
+                        return (
+                            <li key={idx} className='clientLogo'>
+                                <GatsbyImage 
+                                    image={logo.image.asset.gatsbyImageData} 
+                                    alt="Logo"
+                                    quality="50"
+                                    style={{height: '100%', width: '100%'}}
+                                    className='clientLogoImg'
+                                    imgClassName="clientLogoImgFile"
+                                    layout="fixed"
+                                    objectFit="contain"
+                                    placeholder="blurred"
+                                    
+                                />
+                            </li>
+                        )
+                    })}
+                </ClientBlock>
+            </ClientScroller>
+        </div>
+        
     )
-}
+})
 
 export default ClientSection

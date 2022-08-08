@@ -63,16 +63,16 @@ const ClientLogos = styled.ul`
     width: 100%;
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr) );
+    grid-template-columns: repeat(6, 1fr);
     margin: 0;
     padding: 0;
     /* justify-items: center;
     align-items: center; */
     height: 80%;
     list-style: none;
-    @media ${device.mediaMinLarge} {    
+    /* @media ${device.mediaMinLarge} {    
         flex-direction: row;
-    }
+    } */
 
     li {
         width: 100%;
@@ -86,9 +86,6 @@ const ClientLogos = styled.ul`
 `
 
 const ClientSection2 = () => {
-    
-    const clientSectionRef = useRef()
-    const tl = useRef()
 
     const data = useStaticQuery(
         graphql`
@@ -124,11 +121,14 @@ const ClientSection2 = () => {
         `
       );
 
+          
+    const clientSectionRef = useRef()
+    const tl = useRef()
+
     const tiledBG = getImage(data.tiledMadeOfPlayImage);
 
     const clientLogoNodes =
     data && data.clientLogos && mapEdgesToNodes(data.clientLogos)
-    let timeline = tl.current
     let q = gsap.utils.selector(clientSectionRef.current)
 
     useEffect(() => {
@@ -137,7 +137,7 @@ const ClientSection2 = () => {
             yPercent: 50,
             xPercent: 10
         })
-        timeline = gsap.timeline({
+        tl.current = gsap.timeline({
             defaults: { ease: "power4.out" },
             
             scrollTrigger: {
@@ -146,14 +146,12 @@ const ClientSection2 = () => {
                 // end: 'bottom 50%',
                 // scrub: true,
                 toggleActions: 'play none none reverse',
-                
             }
         })
-        timeline.to(q('.clientLogo'), {
+        .to(q('.clientLogo'), {
             yPercent: 0,
             xPercent: 0,
             autoAlpha: 1,
-            // duration: 2,
             stagger: {
               amount: 0.25,
               each: 0.1,
@@ -174,9 +172,8 @@ const ClientSection2 = () => {
                             return (
                                 <li key={idx} className='clientLogo'>
                                     <GatsbyImage 
-                                        data-speed="auto" 
                                         image={logo.image.asset.gatsbyImageData} 
-                                        alt={logo.alt}
+                                        alt="Logo"
                                         quality="50"
                                         style={{height: '100%', width: '100%'}}
                                         className='clientLogoImg'
@@ -184,7 +181,6 @@ const ClientSection2 = () => {
                                         layout="fixed"
                                         objectFit="contain"
                                         placeholder="blurred"
-                                        
                                     />
                                 </li>
                             )
@@ -193,7 +189,7 @@ const ClientSection2 = () => {
                 }
             </Column>
             <Column>
-                <h1>We work with brands!</h1>
+                <h1>Festival Partners</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae explicabo iusto quaerat alias tempora sit modi accusamus dolores iste laboriosam? Voluptatibus explicabo id, neque ea necessitatibus possimus itaque beatae laboriosam.</p>
             </Column>
         </ClientContainer>

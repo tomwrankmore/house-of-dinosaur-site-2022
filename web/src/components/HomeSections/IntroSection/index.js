@@ -1,23 +1,22 @@
 import React, {useRef, useEffect} from "react";
-import { graphql, useStaticQuery } from 'gatsby';
-import {GatsbyImage} from "gatsby-plugin-image"
 import classNames from "classnames";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollSmoother from "gsap/ScrollSmoother";
+import SplitText from "gsap/SplitText";
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
 
 import styled from "styled-components";
 import { colors } from "../../../styles/colours";
 import { device } from '../../../styles/mediaQueries';
 import FlexSection from "../../FlexSection";
-import { paragraph } from "../../../components/typography.module.css"
+import { paragraph, responsiveTitle1, responsiveTitle3 } from "../../../components/typography.module.css"
+import Dino from "../../../assets/dino.svg"
 
 const IntroSectionInner = styled.div` 
-    width: calc(100vw - 2rem);
+    width: calc(100% - 2rem);
     height: 100%;
-    /* height: 100%; */
     padding: 2rem;
     background-color: ${colors.dinoSand};
     .you {
@@ -26,7 +25,7 @@ const IntroSectionInner = styled.div`
         font-size: 1.2rem;
     }
     @media ${device.mediaMinLarge} {
-        height: calc(100vh - 2rem);
+        height: calc(100% - 2rem);
     }
 `
 
@@ -34,6 +33,7 @@ const FlexInner = styled.div`
     display: flex;
     position: relative;
     overflow: hidden;
+    height: 100%;
     flex-direction: column;
     gap: 5vw;
     align-items: center;
@@ -49,6 +49,14 @@ const FlexInner = styled.div`
 
 const LeftColumn = styled.div` 
     flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .dinoImg {
+        max-width: 320px;
+        width: 100%;
+    }
     @media ${device.mediaMinLarge} {    
         flex: 4;
     }
@@ -59,72 +67,30 @@ const RightColumn = styled.div`
     @media ${device.mediaMinLarge} {
         flex: 6;
     }
-    display: flex;
-    /* align-items: flex-end; */
-    justify-content: flex-end;
 `
 
-const IntroSection = ({dinoFlagImg}) => {
-    const introSectionRef = useRef()
-    const tl = useRef()
-    let timeline = tl.current
-    let q = gsap.utils.selector(introSectionRef.current)
-
-    useEffect(() => {
-        gsap.set(q('.introP'), {
-            visibility: 'hidden',
-            yPercent: 120,
-        })
-        timeline = gsap.timeline({
-            defaults: { ease: "power4.out" },
-            scrollTrigger: {
-                trigger: introSectionRef.current,
-                start: 'top 50%',
-                end: 'bottom top',
-                toggleActions: 'play none none reverse',
-            },
-        })
-        timeline.to(q('.introP'), {
-            yPercent: 0,
-            autoAlpha: 1,
-            // duration: 2,
-            stagger: {
-              amount: 0.25,
-              each: 0.1,
-            },
-        })
-    }, [])
-
+const IntroSection = React.forwardRef((props, ref) => {
+    
     return (
-        <FlexSection bg={colors.darkDinoGreen} ref={introSectionRef}>
+        <FlexSection bg={colors.darkDinoGreen} ref={ref}>
             <IntroSectionInner>
                 <FlexInner>
                     <LeftColumn>
-                        <p className={classNames({paragraph},'introP')}>Introducing the most incredible people in the known universe... <strong>You</strong>.</p>
-                        <p className={classNames({paragraph},'introP')}>Remember when you were a kid and everything felt new and exciting and nothing was impossible and dinosaurs were cool? House of Dinosaur remembers.</p>
-                        <p className={classNames({paragraph},'introP')}>They'll take that feeling, shower it in festival sauce and set it to music. They'll spray it silver and fire it from a cannon. They'll write a story full of it and drop you right in the middle.</p>
-                        <p className={classNames({paragraph},'introP')}>House of Dinosaur engineers story driven, party entertainment for festivals, club nights and corporate events that makes the audience the star of the show.</p>
-                        <p className={classNames({paragraph},'introP')}>So, if you've never played Disco Dodgeball in the desert dressed as a dinosaur dancing to DJs, get in touch.</p>
+                        <Dino className='dinoImg'/>
                     </LeftColumn>
                     <RightColumn>
-                        {dinoFlagImg && (
-                            <GatsbyImage 
-                                data-speed="auto" 
-                                image={dinoFlagImg} 
-                                alt=""
-                                quality="50"
-                                style={{height: '100%', width: '100%', border: 'solid 0.5rem #14463D', boxShadow: '10px 10px 0px 0px #14463D'}}
-                                className='crewImage'
-                                imgClassName="crewImageFile"
-                                layout="fixed"
-                            />
-                        )}
+                        <h1 className={responsiveTitle1}>Introducing the most incredible people in the known universe... <strong>You</strong>.</h1>
+                        <p className={paragraph}>Remember when you were a kid and everything felt new and exciting and nothing was impossible and dinosaurs were cool? House of Dinosaur remembers.</p>
+                        <p className={paragraph}>They'll take that feeling, shower it in festival sauce and set it to music. They'll spray it silver and fire it from a cannon. They'll write a story full of it and drop you right in the middle.</p>
+                        <p className={paragraph}>House of Dinosaur engineers story driven, party entertainment for festivals, club nights and corporate events that makes the audience the star of the show.</p>
+                        <p className={paragraph}>So, if you've never played Disco Dodgeball in the desert dressed as a dinosaur dancing to DJs, get in touch.</p>
                     </RightColumn>
                 </FlexInner>
 
             </IntroSectionInner>
         </FlexSection>
     )
-}
+
+})
 
 export default IntroSection;

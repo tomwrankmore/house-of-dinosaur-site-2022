@@ -13,7 +13,7 @@ import {
 } from "../lib/helpers";
 import Container from "../components/Container/container";
 import Hero from "../components/Hero/hero";
-import { heroAnim, straplineAnim } from "../components/animations/";
+import { heroAnim, straplineAnim, introTextAnim, dividerTextAnim, clientsAnim1, simpleLogoCloudAnim } from "../components/animations/";
 
 import GraphQLErrorList from "../components/graphql-error-list";
 import ProjectPreviewGrid from "../components/ProjectPreviewGrid/project-preview-grid";
@@ -24,7 +24,10 @@ import HouseDivider from "../components/HomeSections/HouseOfDivider"
 import IntroSection from "../components/HomeSections/IntroSection/"
 import ClientSection from "../components/HomeSections/ClientSection/"
 import ClientSection2 from "../components/HomeSections/ClientSectiont2/"
-
+import SimpleLogoCloud from "../components/SimpleLogoCloud"
+import Testimonial from "../components/Testimonial"
+import CTA from "../components/CallToAction"
+import Footer from "../components/Footer"
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -47,6 +50,14 @@ export const query = graphql`
       }
     }
     dinoFlag: file(relativePath: {eq: "dinoflag.png"}) {
+      id
+      childImageSharp {
+        gatsbyImageData(
+          quality: 50, 
+          webpOptions: {quality: 70})
+      }
+    }
+    dinoImg: file(relativePath: {eq: "dino.png"}) {
       id
       childImageSharp {
         gatsbyImageData(
@@ -92,6 +103,64 @@ export const query = graphql`
         }
       }
     }
+    clientLogos: allSanityClientBrandLogo {
+        edges {
+            node {
+                id
+                image {
+                    asset {
+                        gatsbyImageData(
+                            formats: AUTO, 
+                            width: 500,
+                            placeholder: BLURRED
+                        )
+                    }
+                    alt
+                }
+            }
+        }
+    }
+    clientTestimonialLogo: allSanityClientBrandLogo(filter: {title: {eq: "Facebook"}}) {
+      edges {
+        node {
+          id
+          image {
+            asset {
+              gatsbyImageData(formats: AUTO, width: 500, placeholder: BLURRED)
+            }
+          }
+        }
+      }
+    }
+    festivalLogos: allSanityClientFestivalLogo {
+        edges {
+            node {
+                id
+                image {
+                    asset {
+                        gatsbyImageData(
+                            formats: AUTO, 
+                            width: 500,
+                            placeholder: BLURRED
+                        )
+                    }
+                    alt
+                }
+            }
+        }
+    }
+    festivalTestimonialLogo: allSanityClientFestivalLogo(filter: {title: {eq: "Glastonbury"}}) {
+      edges {
+        node {
+          id
+          image {
+            asset {
+              gatsbyImageData(formats: AUTO, width: 500, placeholder: BLURRED)
+            }
+          }
+        }
+      }
+    }
   }
 `;
 
@@ -100,7 +169,10 @@ const IndexPage = props => {
 
   const crewImage = getImage(data.crew);
   const dinoFlagImg = getImage(data.dinoFlag);
+  const dinoImg = getImage(data.dinoImg)
 
+  const clientData1 = data && data.clientLogos && mapEdgesToNodes(data.clientLogos)
+  const clientData2 = data && data.clientLogos && mapEdgesToNodes(data.festivalLogos)
 
   if (errors) {
     return (
@@ -112,11 +184,28 @@ const IndexPage = props => {
 
   const spinnerRef = useRef(null)
   const spinnerTl = useRef();
+
+  // Section Refs
   const heroRef = useRef()
   const straplineSectionRef = useRef()
-  
+  const introSectionRef = useRef()
+  const dividerSectionRef = useRef()
+  const madeOfPlayRef = useRef()
+  const clientsSection1Ref = useRef()
+  const simpleLogoCloudRef = useRef()
+  const simpleLogoCloudRef2 = useRef()
   const tiledBgRef = useRef()
+
+  // Timeline Refs  
   const straplineTl = useRef();
+  const introSectionTL = useRef(); 
+  const dividerSectionTL = useRef(); 
+  const dividerSectionTL2 = useRef(); 
+  const madeOfPlayTl = useRef()
+  const clientsTL1 = useRef();
+  const horizTl = useRef();
+  const simpleLogoCloudTl = useRef();
+  const simpleLogoCloudTl2 = useRef();
 
   useEffect(() => {
       let rotateSetter = gsap.quickTo(spinnerRef.current, 'rotation')
@@ -136,7 +225,11 @@ const IndexPage = props => {
       spinnerTl.current = gsap.timeline()
       heroAnim(smoother, spinnerRef.current, spinnerTl.current, tiledBgRef.current, heroRef.current)
       straplineAnim(smoother, straplineSectionRef.current, straplineTl.current)
-
+      introTextAnim(introSectionRef, introSectionTL.current)
+      dividerTextAnim(dividerSectionRef, dividerSectionTL, dividerSectionTL2)
+      // clientsAnim1(clientsSection1Ref, clientsTL1.current)
+      simpleLogoCloudAnim(simpleLogoCloudRef, simpleLogoCloudTl.current)
+      simpleLogoCloudAnim(simpleLogoCloudRef2, simpleLogoCloudTl2.current)
   }, [])
 
   const site = (data || {}).site;
@@ -157,20 +250,38 @@ const IndexPage = props => {
       <div id="smooth-content">
         <SEO title={site.title} description={site.description} keywords={site.keywords} />
         <Spinner ref={spinnerRef} />
-        <Hero tiledBgRef={tiledBgRef} ref={heroRef} />
+         <Hero tiledBgRef={tiledBgRef} ref={heroRef} />
         <StraplineSection ref={straplineSectionRef} />
-        <IntroSection dinoFlagImg={dinoFlagImg} />
-        <HouseDivider />
-        <ClientSection />
-        <ClientSection2 />
-        <div style={{height: '100vh'}}>
-          spacer
-        </div>
-        <div style={{height: '100vh'}}>
-          spacer
-        </div>
+        <IntroSection ref={introSectionRef} introSectionTL={introSectionTL.current} /> 
+        <HouseDivider ref={dividerSectionRef} crewImage={crewImage} />
+        <SimpleLogoCloud 
+          clientData={clientData1} 
+          title="Brand Partners" 
+          paragraph="We've worked with a range of brand on a number of amazing activations. Trusted to bring the vibes by these guys." 
+          logoLength={clientData1.length}
+          ref={simpleLogoCloudRef} 
+        />
+        <Testimonial 
+          logo={data.clientTestimonialLogo}
+          paragraph="We've worked with many events companies but Hod are trusted to bring the vibes." 
+        />
+        <SimpleLogoCloud 
+          clientData={clientData2} 
+          title="Festival Partners" 
+          paragraph="We also work closely with a range of Festivals. Also trusted to bring the vibes by these guys." 
+          logoLength={clientData2.length}
+          ref={simpleLogoCloudRef2} 
+        />
+        <Testimonial 
+          logo={data.festivalTestimonialLogo}
+          paragraph="We've worked with many events companies but Hod are trusted to bring the vibes." 
+        />
+        {/* <ClientSection 
+          clientData1={clientData1} 
+          ref={clientsSection1Ref} 
+        /> */}
+        <CTA/>
         {/* <Container>
-          <h1>Welcome to {site.title}</h1>
           {projectNodes && (
             <ProjectPreviewGrid
               title="Latest projects"
@@ -179,6 +290,7 @@ const IndexPage = props => {
             />
           )}
         </Container> */}
+        <Footer/>
       </div>
     </Layout>
   );

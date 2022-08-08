@@ -17,6 +17,7 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-react-helmet',
     `gatsby-plugin-styled-components`,
+    'gatsby-plugin-postcss',
     {
       resolve: 'gatsby-source-sanity',
       options: {
@@ -41,6 +42,7 @@ module.exports = {
         path: `${__dirname}/src/assets/`,
       },
     },
+    
     // {
     //   resolve: 'gatsby-source-filesystem',
     //   options: {

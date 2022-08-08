@@ -1,114 +1,119 @@
-import React, {useRef, useEffect} from "react";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import ScrollSmoother from "gsap/ScrollSmoother";
-
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+import React from "react";
+import FlexSection from "../../FlexSection/";
+import { BgImage } from 'gbimage-bridge';
 
 import styled from "styled-components";
 import { colors } from "../../../styles/colours";
+import { device } from "../../../styles/mediaQueries"
+
+const funListItems = [
+    'Stories',
+    'Fun',
+    'Games',
+    'Silliness',
+    'Love',
+    'Celebration',
+    'You',
+]
 
 const HouseDivider = styled.div` 
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 85vh;
-    background-color: ${colors.dinoSunshine};
-`
-
-const TitleContainer = styled.div` 
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: relative;
-    overflow: hidden;
-`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 2rem);
+    margin: 0 auto;
+    background-color: ${colors.dinoSunshine};
+    margin-bottom: 1rem;
 
-const DividerTitle = styled.div` 
-    color: ${colors.dinoSnow};
-    font-family: "Syne Bold";
-    font-size: clamp(2rem, 4rem, 10vw);
-    font-weight: bold;
-
-    &.left {
-        margin-right: 1rem;
-    }
-
-    &.right {
+    .dividerBgImg {
+        width: 100%;
+        min-height: 100%;
         display: flex;
-        flex-direction: column;
-        height: 6rem;
-        
-        span {
-            display: block;
-            color: ${colors.dinoSand}
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        @media ${device.mediaMinMedium} { 
+            width: 60%;
         }
     }
 `
 
-const HouseOfDivider = (props) => {
+const HeadingWrapper = styled.div`
+    width: 50%;
+    padding: 2rem;
+    position: relative;
+    display: flex;
+    @media ${device.mediaMinMedium} { 
+        width: 40%;
+    }
+`
 
-    const storiesRef = useRef(null)
-    const tl = useRef()
+const Overlay = styled.div` 
+    background-color: ${colors.darkDinoGreen};
+    opacity: 0.85;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+`
 
-    const items = [
-        'Stories',
-        'Fun',
-        'Games',
-        'Silliness',
-        'Love',
-        'Celebration',
-        'You',
-        'Dinosaur'
-    ]
+const HouseOf = styled.h1` 
+    padding-right: 1rem;
+    font-size: clamp(1rem, 10vw, 3rem)!important; 
+    font-weight: bold;
+    color: #fff;
+`
+const FunList = styled.ul` 
+    font-weight: bold;
+    font-size: clamp(1rem, 10vw, 3rem); 
+    position: relative;
+    z-index: 101;
+    flex: 1;
+    overflow: hidden;
+    li {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: white;
+        &.funItem {
+            color: ${colors.dinoSand};
+        }
+    }
+`
 
-    useEffect(() => {
-        let timeline = tl.current
-        let q = gsap.utils.selector(storiesRef.current)
-
-        let box = q('.right');
-
-        // multiply by number of items less 1
-        let height = box[0].offsetHeight * 7;
-
-        timeline = gsap.timeline({
-            defaults: { ease: "power4.out" },
-            scrollTrigger: {
-                trigger: storiesRef.current,
-                start: 'top 50%',
-                end: 'bottom top',
-                markers: true,
-                scrub: 1,
-                // pin: storiesRef.current
-            },
-        })
-        // timeline.to(storiesRef.current, {
-        //     yPercent: 100
-        // })
-        timeline.to(q('.right'), {
-            y: -height,
-        }, '<')
-    }, [])
+const HouseOfDivider = React.forwardRef(({crewImage}, ref) => {
 
     return (
-        <HouseDivider ref={storiesRef}>
-            <TitleContainer>
-                <DividerTitle className="left">House Of</DividerTitle>
-                <DividerTitle className="right">
-                    <span>Stories</span>
-                    <span>Fun</span>
-                    <span>Games</span>
-                    <span>Silliness</span>
-                    <span>Love</span>
-                    <span>Celebration</span>
-                    <span>You</span>
-                    <span style={{color: 'white'}}>Dinosaur</span>
-                </DividerTitle>
-            </TitleContainer>
-            
-        </HouseDivider>
+        <FlexSection ref={ref}>
+            <HouseDivider>
+                <HeadingWrapper className="headingWrapper">
+                    <div className="absolute lg:relative z-40 flex flex-row bg-dinoSunshine w-80 lg:w-full">
+                        <HouseOf className='dividerHeading'>House of</HouseOf>
+                        <FunList>
+                            {funListItems.map((item, idx) => {
+                                return (
+                                    <li className="funItem" key={idx}>
+                                        <span className=''>{item}</span>
+                                    </li>
+                                )
+                            })}
+                            <li className="dinoItem">
+                                <span className=''>Dinosaur</span>
+                            </li>
+                        </FunList>
+                    </div>
+                </HeadingWrapper>
+                
+                <BgImage image={crewImage} className="dividerBgImg" style={{ }}>
+                    <Overlay className="overlay"/>
+                </BgImage>
+            </HouseDivider>
+        </FlexSection>  
     )
-}
+})
 
 export default HouseOfDivider;
