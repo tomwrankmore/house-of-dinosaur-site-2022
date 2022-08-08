@@ -33,13 +33,13 @@ export function buildImageObj(source) {
   return imageObj;
 }
 
-export const ShowScrollbar = () => {
-  document.getElementsByTagName('body')[0].classList.remove('hide-scroll');
-};
+// export const ShowScrollbar = () => {
+//   document.getElementsByTagName('body')[0].classList.remove('hide-scroll');
+// };
 
-export const HideScrollbar = () => {
-  document.getElementsByTagName('body')[0].classList.add('hide-scroll');
-};
+// export const HideScrollbar = () => {
+//   document.getElementsByTagName('body')[0].classList.add('hide-scroll');
+// };
 
 // helper function that clones the targets, places them next to the original, then animates the xPercent in a loop to make it appear to roll across the screen in a seamless loop.
 export const roll = (targets, vars, reverse) => {
