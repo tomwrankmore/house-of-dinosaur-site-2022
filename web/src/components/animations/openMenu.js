@@ -1,4 +1,4 @@
-import gsap from 'gsap';
+import gsap from "gsap";
 
 const openMenu = (menu, revealMenu, revealMenuShadow) => {
   console.log('openMenu Ran')

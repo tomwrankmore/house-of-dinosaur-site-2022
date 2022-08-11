@@ -1,17 +1,17 @@
-import React, { useRef, useEffect } from 'react';
-import { Link } from 'gatsby';
+import React, { useRef, useEffect } from "react";
+import { Link } from "gatsby";
 import gsap from "gsap";
-import { HideScrollbar } from '../../lib/helpers';
-import { ShowScrollbar } from '../../lib/helpers';
+import { HideScrollbar } from "../../lib/helpers";
+import { ShowScrollbar } from "../../lib/helpers";
 import { FaVimeoV, FaInstagram } from "react-icons/fa";
-import { Menu, MenuShadowLayer, MenuLayer, ContactWrapper, NavList, ContactButton } from './overlay-nav.styled'
+import { Menu, MenuShadowLayer, MenuLayer, ContactWrapper, NavList, ContactButton } from "./overlay-nav.styled"
 
 import {
     openMenu,
     staggerReveal,
     closeMenu,
     revealNavLinks
-  } from '../../components/animations';
+  } from "../../components/animations";
 
 const OverlayNav = ({ menuState }) => {
 
@@ -26,13 +26,13 @@ const OverlayNav = ({ menuState }) => {
     /** Initial state of clicked is null */
     useEffect(() => {
         if(menuState.clicked === false) {
-            ShowScrollbar()
+            // ShowScrollbar()
             // smootherState.paused(false)
             closeMenu(menu.current, revealMenu.current, revealMenuShadow.current)
         }  else if (
             menuState.clicked === true || (menuState.clicked == true && menuState.initial === null)
         ) {
-            HideScrollbar()
+            // HideScrollbar()
             // smootherState.paused(true)
             openMenu(menu.current, revealMenuShadow.current, revealMenu.current)
             staggerReveal(revealMenuShadow.current, revealMenu.current)

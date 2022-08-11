@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { colors } from '../../styles/colours';
-import { device } from '../../styles/mediaQueries';
+import styled from "styled-components";
+import { colors } from "../../styles/colours";
+import { device } from "../../styles/mediaQueries";
 
 export const Menu = styled.div`
   display: none;

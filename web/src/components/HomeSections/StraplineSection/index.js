@@ -1,10 +1,10 @@
 import React from "react";
-import OrangeSquiggle from '../../../assets/squiggles/squiggles-2-orange.svg'
-import MadeOfPlayLogo from '../../../assets/made-of-play-logo-white.svg'
+import OrangeSquiggle from "../../../assets/squiggles/squiggles-2-orange.svg"
+import MadeOfPlayLogo from "../../../assets/made-of-play-logo-white.svg"
 
 import styled from "styled-components";
 import { colors } from "../../../styles/colours";
-import {device} from '../../../styles/mediaQueries'
+import {device} from "../../../styles/mediaQueries"
 
 
 const StyledSectionStrapline = styled.div` 

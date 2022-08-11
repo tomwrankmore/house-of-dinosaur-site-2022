@@ -1,8 +1,8 @@
 import React, {useEffect, useRef} from "react";
 import {GatsbyImage} from "gatsby-plugin-image"
 import styled from "styled-components";
-import {device} from '../../../styles/mediaQueries';
-import {colors} from '../../../styles/colours'
+import {device} from "../../../styles/mediaQueries";
+import {colors} from "../../../styles/colours"
 import FlexSection from "../../FlexSection";
 
 import gsap from "gsap";

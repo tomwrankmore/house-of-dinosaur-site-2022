@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
 
 import styled from "styled-components";
 import { colors } from "../../../styles/colours";
-import { device } from '../../../styles/mediaQueries';
+import { device } from "../../../styles/mediaQueries";
 import FlexSection from "../../FlexSection";
 import { paragraph, responsiveTitle1, responsiveTitle3 } from "../../../components/typography.module.css"
 import Dino from "../../../assets/dino.svg"

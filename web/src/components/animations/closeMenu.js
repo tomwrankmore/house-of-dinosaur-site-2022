@@ -1,4 +1,4 @@
-import gsap from 'gsap';
+import gsap from "gsap";
 
 const closeMenu = (menu, revealMenu, revealMenuShadow) => {
   gsap.to([revealMenu, revealMenuShadow], {

@@ -1,19 +1,19 @@
 import React, {useRef, useEffect} from "react";
-import { graphql, useStaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from "gatsby";
 
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollSmoother from "gsap/ScrollSmoother";
 
 import { getImage, GatsbyImage } from "gatsby-plugin-image"
-import { BgImage } from 'gbimage-bridge';
+import { BgImage } from "gbimage-bridge";
 import { mapEdgesToNodes } from "../../../lib/helpers";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 import styled from "styled-components";
 import { colors } from "../../../styles/colours";
-import { device } from '../../../styles/mediaQueries';
+import { device } from "../../../styles/mediaQueries";
 import { paragraph, responsiveTitle1, responsiveTitle3 } from "../../../components/typography.module.css";
 
 const ClientContainer = styled.div` 

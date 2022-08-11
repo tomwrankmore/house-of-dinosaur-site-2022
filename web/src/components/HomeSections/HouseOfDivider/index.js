@@ -1,6 +1,6 @@
 import React from "react";
 import FlexSection from "../../FlexSection/";
-import { BgImage } from 'gbimage-bridge';
+import { BgImage } from "gbimage-bridge";
 
 import styled from "styled-components";
 import { colors } from "../../../styles/colours";

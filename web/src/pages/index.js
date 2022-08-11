@@ -1,5 +1,5 @@
-import React, {useRef, useEffect, useState} from "react";
-import { getImage, GatsbyImage } from "gatsby-plugin-image"
+import React, {useRef, useEffect } from "react";
+import { getImage, GatsbyImage } from "gatsby-plugin-image";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollSmoother from "gsap/ScrollSmoother";
@@ -16,7 +16,7 @@ import Hero from "../components/Hero/hero";
 import { heroAnim, straplineAnim, introTextAnim, dividerTextAnim, clientsAnim1, simpleLogoCloudAnim } from "../components/animations/";
 
 import GraphQLErrorList from "../components/graphql-error-list";
-import ProjectPreviewGrid from "../components/ProjectPreviewGrid/project-preview-grid";
+import ProjectPreviewGrid from "../components/project-preview-grid";
 import SEO from "../components/seo";
 import Layout from "../containers/layout";
 import StraplineSection from "../components/HomeSections/StraplineSection/index"
@@ -29,10 +29,10 @@ import Testimonial from "../components/Testimonial"
 import CTA from "../components/CallToAction"
 import Footer from "../components/Footer"
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
-
-import Spinner from '../components/SVGComponents/spinner'
+import Spinner from "../components/SVGComponents/spinner"
 import FlexSection from "../components/FlexSection";
+
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 export const query = graphql`
   query IndexPageQuery {

@@ -1,17 +1,13 @@
 import React, {useState, useEffect, useRef, useContext} from "react";
 import { Link } from "gatsby";
 import Icon from "../icon";
-import { IoMenu, IoClose } from 'react-icons/io5';
+import { IoMenu, IoClose } from "react-icons/io5";
 import BrandingIcon from "../../assets/branding-icon.svg"
 import OverlayNav from "../OverlayNav/overlay-nav"
-
-// import { GlobalStateContext } from "../../context/GlobalContextProvider";
 
 import {StyledHeader, Wrapper, Branding, ToggleNavButton, Nav} from './header.styled'
 
 const Header = () => {
-  // const globalState = useContext(GlobalStateContext);
-  // console.log(globalState.theme)
   
   // Menu State
   const [menuState, setMenuState] = useState({

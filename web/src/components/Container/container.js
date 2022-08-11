@@ -1,6 +1,6 @@
 import React from "react";
-import styled from 'styled-components'
-import {device} from '../../styles/mediaQueries'
+import styled from "styled-components"
+import {device} from "../../styles/mediaQueries"
 
 const StyledContainer = styled.div` 
   max-width: 1980px;

@@ -1,4 +1,4 @@
-@import '../styles/custom-properties.css';
+@import "../styles/custom-properties.css";
 
 .root {
   margin: 2rem 0 3rem;
@@ -23,7 +23,7 @@
   justify-content: center;
   align-items: center;
 
-  @nest & > div:last-child {
+  @nest &>div:last-child {
     flex: 1;
     margin-left: 0.75rem;
   }

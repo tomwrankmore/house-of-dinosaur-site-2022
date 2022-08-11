@@ -1,4 +1,4 @@
-import gsap from 'gsap';
+import gsap from "gsap";
 
 const staggerReveal = (node1, node2) => {
   gsap.from([node1, node2], {

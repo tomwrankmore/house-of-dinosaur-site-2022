@@ -1,5 +1,5 @@
 import React, {useRef, useEffect} from "react";
-import { graphql, useStaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from "gatsby";
 
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";

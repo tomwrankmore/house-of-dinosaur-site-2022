@@ -1,6 +1,6 @@
 import React, {useRef, useEffect} from "react";
 import gsap from "gsap";
-import { BgImage } from 'gbimage-bridge';
+import { BgImage } from "gbimage-bridge";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollSmoother from "gsap/ScrollSmoother";
 

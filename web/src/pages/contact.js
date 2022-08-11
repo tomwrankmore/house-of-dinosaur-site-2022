@@ -10,7 +10,6 @@ import ScrollSmoother from "gsap/ScrollSmoother";
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 const Contact = () => {
-  useEffect(() => window.scrollTo(0, 0), [])
   return (
   <Layout>
     <SEO title="Contact" />

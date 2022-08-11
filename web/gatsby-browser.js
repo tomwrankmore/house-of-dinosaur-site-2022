@@ -1,17 +1,4 @@
-// import React from 'react'
-// import GlobalContextProvider from './src/context/GlobalContextProvider'
-
-// export const wrapRootElement = ({ element }) => {
-    
-//   return (
-//     <GlobalContextProvider>
-//       {element}
-//     </GlobalContextProvider>
-//   )
-// }
-
-import './src/styles/global.css'
-
+import React from 'react'
 // BG IMAGE polyfill
 // ES5 way
 // exports.onClientEntry = () => {

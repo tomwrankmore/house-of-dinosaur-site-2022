@@ -4,14 +4,14 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollSmoother from "gsap/ScrollSmoother";
 import { getImage, GatsbyImage } from "gatsby-plugin-image"
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
-
 import styled from "styled-components";
 import { colors } from "../../styles/colours";
-import { device } from '../../styles/mediaQueries';
+import { device } from "../../styles/mediaQueries";
 
 import { paragraph, responsiveTitle1, responsiveTitle3 } from "../../components/typography.module.css";
 import { useEffect } from "react";
+
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 const LogoCloud = styled.div` 
   grid-template-columns: repeat( auto-fit, minmax(120px, 1fr) );
