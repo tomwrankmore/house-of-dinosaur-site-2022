@@ -1,18 +1,7 @@
-import React, {useRef, useEffect} from "react";
-import { graphql, useStaticQuery } from "gatsby";
+import React from "react";
 import {GatsbyImage} from "gatsby-plugin-image"
-import classNames from "classnames";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import ScrollSmoother from "gsap/ScrollSmoother";
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
-
-import styled from "styled-components";
-import { colors } from "../../../styles/colours";
-import { device } from "../../../styles/mediaQueries";
 import FlexSection from "../../FlexSection";
-import { paragraph } from "../../../components/typography.module.css"
 
 const IntroSection = ({crewImage}) => {
     <FlexSection>

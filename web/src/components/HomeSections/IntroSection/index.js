@@ -1,17 +1,10 @@
-import React, {useRef, useEffect} from "react";
-import classNames from "classnames";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import ScrollSmoother from "gsap/ScrollSmoother";
-import SplitText from "gsap/SplitText";
-
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
+import React from "react";
 
 import styled from "styled-components";
 import { colors } from "../../../styles/colours";
 import { device } from "../../../styles/mediaQueries";
 import FlexSection from "../../FlexSection";
-import { paragraph, responsiveTitle1, responsiveTitle3 } from "../../../components/typography.module.css"
+import { paragraph, responsiveTitle1 } from "../../../components/typography.module.css"
 import Dino from "../../../assets/dino.svg"
 
 const IntroSectionInner = styled.div` 

@@ -1,36 +1,28 @@
 import React, {useRef, useEffect } from "react";
-import { getImage, GatsbyImage } from "gatsby-plugin-image";
 import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import ScrollSmoother from "gsap/ScrollSmoother";
-import styled from "styled-components";
-
+import { getImage, GatsbyImage } from "gatsby-plugin-image";
 import { graphql } from "gatsby";
+import GraphQLErrorList from "../components/graphql-error-list";
+import { heroAnim, straplineAnim, introTextAnim, dividerTextAnim, clientsAnim1, simpleLogoCloudAnim } from "../components/animations/";
 import {
   mapEdgesToNodes,
   filterOutDocsWithoutSlugs,
   filterOutDocsPublishedInTheFuture
 } from "../lib/helpers";
-import Container from "../components/Container/container";
-import Hero from "../components/Hero/hero";
-import { heroAnim, straplineAnim, introTextAnim, dividerTextAnim, clientsAnim1, simpleLogoCloudAnim } from "../components/animations/";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import ScrollSmoother from "gsap/ScrollSmoother";
 
-import GraphQLErrorList from "../components/graphql-error-list";
-import ProjectPreviewGrid from "../components/project-preview-grid";
-import SEO from "../components/seo";
 import Layout from "../containers/layout";
+import SEO from "../components/seo";
+import Spinner from "../components/SVGComponents/spinner"
+import Hero from "../components/Hero/hero";
 import StraplineSection from "../components/HomeSections/StraplineSection/index"
-import HouseDivider from "../components/HomeSections/HouseOfDivider"
 import IntroSection from "../components/HomeSections/IntroSection/"
-import ClientSection from "../components/HomeSections/ClientSection/"
-import ClientSection2 from "../components/HomeSections/ClientSectiont2/"
+import HouseDivider from "../components/HomeSections/HouseOfDivider"
 import SimpleLogoCloud from "../components/SimpleLogoCloud"
 import Testimonial from "../components/Testimonial"
 import CTA from "../components/CallToAction"
 import Footer from "../components/Footer"
-
-import Spinner from "../components/SVGComponents/spinner"
-import FlexSection from "../components/FlexSection";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -250,7 +242,7 @@ const IndexPage = props => {
       <div id="smooth-content">
         <SEO title={site.title} description={site.description} keywords={site.keywords} />
         <Spinner ref={spinnerRef} />
-         <Hero tiledBgRef={tiledBgRef} ref={heroRef} />
+        <Hero tiledBgRef={tiledBgRef} ref={heroRef} />
         <StraplineSection ref={straplineSectionRef} />
         <IntroSection ref={introSectionRef} introSectionTL={introSectionTL.current} /> 
         <HouseDivider ref={dividerSectionRef} crewImage={crewImage} />

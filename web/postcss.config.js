@@ -1,10 +1,10 @@
 module.exports = () => ({
   plugins: [
-    require('postcss-import'),
-    require('postcss-preset-env')({
-      stage: 0
+    require("postcss-import"),
+    require("postcss-preset-env")({
+      stage: 0,
     }),
-    require('tailwindcss'),
-    require('autoprefixer')
-  ]
-})
+    require("tailwindcss"),
+    require("autoprefixer"),
+  ],
+});

@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import gsap from "gsap";
 
-import Layout from "../components/Layout/layout";
+import Layout from "../components/layout";
 import SEO from "../components/seo";
 
 import ScrollTrigger from "gsap/ScrollTrigger";

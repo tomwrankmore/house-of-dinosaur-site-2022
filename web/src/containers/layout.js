@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { graphql, StaticQuery } from "gatsby";
-import Layout from "../components/Layout/layout";
+import Layout from "../components/layout";
 import "@fontsource/syne"
 import "../styles/global.css"
 

@@ -1,17 +1,17 @@
 import React, {useRef, useEffect, useState} from "react";
 import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import ScrollSmoother from "gsap/ScrollSmoother";
-
 import { graphql } from "gatsby";
-import Container from "../components/Container/container";
-import GraphQLErrorList from "../components/graphql-error-list";
-import ProjectPreviewGrid from "../components/project-preview-grid";
-import SEO from "../components/seo";
-import Layout from "../containers/layout";
 import { mapEdgesToNodes, filterOutDocsWithoutSlugs } from "../lib/helpers";
 
+import Layout from "../containers/layout";
+import SEO from "../components/seo";
+import GraphQLErrorList from "../components/graphql-error-list";
+import Container from "../components/Container/container";
+
+import ProjectPreviewGrid from "../components/project-preview-grid";
 import { responsiveTitle1 } from "../components/typography.module.css";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import ScrollSmoother from "gsap/ScrollSmoother";
 
 export const query = graphql`
   query ArchivePageQuery {

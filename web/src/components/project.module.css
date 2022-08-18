@@ -1,5 +1,5 @@
 @import '../styles/custom-media.css';
-@import '../styles/custom-properties.css';
+@import '../styles/custom-properties.scss';
 
 .root {}
 
@@ -45,8 +45,7 @@
   }
 }
 
-.metaContent {
-}
+.metaContent {}
 
 .publishedAt {
   composes: small from './typography.module.css';

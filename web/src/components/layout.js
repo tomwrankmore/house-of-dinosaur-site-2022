@@ -1,23 +1,32 @@
 import React from "react";
-import Header from "./header";
+import Header from "./Header/header";
+import styled from 'styled-components'
+import { colors } from "../styles/colours";
 
 import "../styles/layout.scss";
 import * as styles from "./layout.module.css";
 
-const Layout = ({ children, onHideNav, onShowNav, showNav, siteTitle }) => (
+const SiteWrapper = styled.div` 
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100%;
+  background-color: ${colors.darkDinoGreen};
+`
+
+const Content = styled.div` 
+  flex: 1;
+`
+
+const Layout = ({ children, siteTitle, id }) => {
+  return (
   <>
-    <Header siteTitle={siteTitle} onHideNav={onHideNav} onShowNav={onShowNav} showNav={showNav} />
-    <div className={styles.content}>{children}</div>
-    <footer className={styles.footer}>
-      <div className={styles.footerWrapper}>
-        <div className={styles.siteInfo}>
-          © {new Date().getFullYear()}, Built with <a href="https://www.sanity.io">Sanity</a> &amp;
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </div>
-      </div>
-    </footer>
+    <Header siteTitle={siteTitle} />
+    <SiteWrapper className='siteWrapper'>
+      <Content>{children}</Content>
+      
+    </SiteWrapper>
   </>
-);
+)};
 
 export default Layout;
