@@ -49,9 +49,9 @@ const OverlayNav = ({ menuState }) => {
                     <li className='navLink'>
                         <Link to="/archive">Archive</Link>
                     </li>
-                    <li className='navLink'>
+                    {/* <li className='navLink'>
                         <Link to="/archive">Portfolio</Link>
-                    </li>
+                    </li> */}
                     <li className='navLink'>
                         <Link to="/contact">Contact</Link>
                     </li>

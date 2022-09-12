@@ -11,12 +11,12 @@ const isProd = process.env.NODE_ENV === "production";
 module.exports = {
   plugins: [
     "gatsby-plugin-postcss",
-    `gatsby-plugin-sass`,
+    "gatsby-plugin-sass",
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     "gatsby-plugin-react-helmet",
-    `gatsby-plugin-styled-components`,
+    "gatsby-plugin-styled-components",
     "gatsby-plugin-postcss",
     {
       resolve: "gatsby-source-sanity",
@@ -42,13 +42,5 @@ module.exports = {
         path: `${__dirname}/src/assets/`,
       },
     },
-
-    // {
-    //   resolve: 'gatsby-source-filesystem',
-    //   options: {
-    //     name: 'images',
-    //     path: `${__dirname}/src/assets/squiggles/`,
-    //   },
-    // },
   ],
 };

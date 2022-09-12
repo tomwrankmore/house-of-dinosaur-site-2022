@@ -7,11 +7,10 @@ import { BgImage } from 'gbimage-bridge';
 import DinosaurLogo from "../DinosaurLogo";
 import HeroWave from "../SVGComponents/heroWave";
 import HeroLogo from "../../assets/hero-logo-full.svg";
-import Circles from "../../assets/blob-scene-haikei.svg";
 import {device} from '../../styles/mediaQueries';
 import {colors} from '../../styles/colours'
 
-export const StyledHero = styled.section`
+const StyledHero = styled.section`
     background-color: ${colors.dinoOffWhite};
     position: relative;
     height: 100vh;
@@ -35,15 +34,6 @@ const StyledHeroLogo = styled(HeroLogo)`
     position: relative;
     z-index: 10;
     clip-path: inset(0 0 52% 0);
-`
-
-const StyledCircles = styled(Circles)` 
-    position: absolute;
-    z-index: 10;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
 `
 
 const DinoLogoWrapper = styled.div`

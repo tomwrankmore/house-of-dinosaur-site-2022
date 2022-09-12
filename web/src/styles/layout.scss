@@ -33,3 +33,11 @@ body>div>div {
 .lineParent {
     overflow: hidden;
 }
+
+.siteWrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: 100%;
+    //   background-color: ${colors.darkDinoGreen};
+}

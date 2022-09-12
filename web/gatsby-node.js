@@ -9,9 +9,7 @@ async function createProjectPages(graphql, actions) {
   const { createPage } = actions;
   const result = await graphql(`
     {
-      allSanitySampleProject(
-        filter: { slug: { current: { ne: null } }, publishedAt: { ne: null } }
-      ) {
+      allSanitySampleProject(filter: {slug:{current:{ne:null}},publishedAt:{ne:null}}) {
         edges {
           node {
             id
@@ -39,7 +37,7 @@ async function createProjectPages(graphql, actions) {
       createPage({
         path,
         component: require.resolve("./src/templates/project.js"),
-        context: { id },
+        context: {id},
       });
     });
 }
